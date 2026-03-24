@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './loginAluno.css';
+import './login.css';
 import imagemLateral from '../../imagens/MentorIA.png';
 import { Link } from 'react-router-dom';
 

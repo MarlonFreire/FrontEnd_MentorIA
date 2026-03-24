@@ -1,5 +1,5 @@
 import React from 'react';
-import './cadastroAluno.css';
+import './cadastro.css';
 import { Link } from 'react-router-dom';
 
 function CadastroAluno() {
