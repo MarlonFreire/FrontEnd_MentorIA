@@ -1,0 +1,147 @@
+/* Layout Principal */
+.login-container {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Lado Esquerdo */
+/* --- Lado Esquerdo (Azul claro) --- */
+.lado-esquerdo {
+  flex: 1;
+  background-color: #e6effb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centraliza o bloco todo na tela */
+  padding: 40px;
+  text-align: center;
+}
+
+.logo-png {
+  /* Diminuir a largura ajuda a reduzir o vazio proporcionalmente */
+  width: 350px; 
+  height: auto;
+  
+  /* MARGEM NEGATIVA: Isso vai "puxar" o título para dentro da área da imagem */
+  margin-bottom: -40px; 
+  
+  display: block;
+}
+
+.lado-esquerdo h2 {
+  margin: 0;
+  font-size: 24px;
+  position: relative; /* Ajuda a garantir que o texto fique visível */
+  z-index: 2;
+}
+
+.lado-esquerdo p {
+  margin-top: 10px;
+  max-width: 350px;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* Lado Direito */
+.lado-direito {
+  flex: 1;
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+}
+
+.subtitulo {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Abas */
+.abas {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 25px;
+}
+
+.abas button {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #666;
+  border-bottom: 3px solid transparent;
+}
+
+.abas button.aba-ativa {
+  color: #1a73e8;
+  border-bottom: 3px solid #1a73e8;
+}
+
+/* Formulário */
+.formulario {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.formulario input {
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline-color: #1a73e8;
+}
+
+.label-senha {
+  display: flex;
+  justify-content: space-between;
+}
+
+.label-senha a {
+  font-size: 12px;
+  text-decoration: none;
+  color: #1a73e8;
+}
+
+.botao-login {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.botao-login:hover {
+  background-color: #1557b0;
+}
+
+.cadastro {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* --- RESPONSIVIDADE (CELULAR) --- */
+@media (max-width: 768px) {
+  .lado-esquerdo {
+    display: none; /* Esconde a parte azul e o logo no celular */
+  }
+
+  .lado-direito {
+    padding: 30px; /* Diminui o espaço nas bordas no celular */
+  }
+
+  .login-container {
+    background-color: white; /* Garante que a tela fique branca */
+  }
+}

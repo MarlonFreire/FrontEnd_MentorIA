@@ -1,0 +1,98 @@
+/* Container que ocupa a tela toda e centraliza o card */
+.cadastro-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f7fa; /* Um cinza azulado bem clarinho para o fundo */
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+/* O "Card" branco onde fica o formulário */
+.cadastro-card {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 450px; /* Largura máxima para não esticar demais */
+  text-align: center;
+}
+
+.cadastro-card h1 {
+  margin-bottom: 10px;
+  color: #1a1a1a;
+  font-size: 28px;
+}
+
+.cadastro-card p {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+/* Estilo do Formulário */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  text-align: left; /* Rótulos alinhados à esquerda */
+}
+
+.formulario label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.formulario input {
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  outline-color: #1a73e8; /* Cor azul ao clicar */
+}
+
+/* Botão de Cadastro (Entrar) */
+.botao-entrar {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+.botao-entrar:hover {
+  background-color: #1557b0;
+}
+
+/* Link para voltar ao Login */
+.voltar-login {
+  margin-top: 25px;
+  font-size: 14px;
+  color: #666;
+}
+
+.voltar-login a {
+  color: #1a73e8;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.voltar-login a:hover {
+  text-decoration: underline;
+}
+
+/* Responsividade: Ajustes para telas bem pequenas */
+@media (max-width: 480px) {
+  .cadastro-card {
+    padding: 25px;
+  }
+}
