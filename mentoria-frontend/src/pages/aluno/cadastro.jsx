@@ -1,9 +1,9 @@
-import React, { useState } from 'react'; // Importamos o useState
+import React, { useState } from 'react';
 import './cadastro.css';
 import { Link } from 'react-router-dom';
 
 function Cadastro() {
-  // 1. Criamos o estado para saber quem está se cadastrando
+
   const [tipoUsuario, setTipoUsuario] = useState('estudante');
 
   return (
@@ -12,7 +12,7 @@ function Cadastro() {
         <h1>Seja Bem-Vindo</h1>
         <p>Por favor, insira seus dados para fazer seu cadastro.</p>
 
-        {/* 2. Adicionamos as abas de seleção */}
+        
         <div className="abas-cadastro">
           <button 
             className={tipoUsuario === 'estudante' ? 'aba-ativa' : ''} 
@@ -35,7 +35,7 @@ function Cadastro() {
           <label>Email</label>
           <input 
             type="email" 
-            /* 3. O placeholder muda conforme o estado */
+            
             placeholder={tipoUsuario === 'estudante' ? 'student@example.com' : 'teacher@example.com'} 
           />
 
