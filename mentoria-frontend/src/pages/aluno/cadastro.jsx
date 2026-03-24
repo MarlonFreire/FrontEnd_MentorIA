@@ -2,7 +2,7 @@ import React from 'react';
 import './cadastro.css';
 import { Link } from 'react-router-dom';
 
-function CadastroAluno() {
+function Cadastro() {
   return (
     <div className="cadastro-container">
       <div className="cadastro-card">
@@ -35,4 +35,4 @@ function CadastroAluno() {
   );
 }
 
-export default CadastroAluno;
+export default Cadastro;
