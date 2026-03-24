@@ -1,0 +1,191 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f5f7fb;
+  color: #1f2937;
+}
+
+/* NAVBAR */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 60px;
+  background: white;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.logo span {
+  color: #2563eb;
+}
+
+nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #374151;
+  font-size: 14px;
+}
+
+.nav-buttons button {
+  margin-left: 10px;
+}
+
+/* BUTTONS */
+
+.btn-primary {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: #e5e7eb;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.btn-outline {
+  border: 1px solid #d1d5db;
+  background: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.big {
+  padding: 15px 30px;
+  font-size: 16px;
+}
+
+/* HERO */
+
+.hero {
+  display: flex;
+  padding: 60px;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-img img {
+  width: 380px;
+  border-radius: 12px;
+}
+
+.hero-text h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  color: #6b7280;
+  margin-bottom: 25px;
+}
+
+/* FEATURES */
+
+.features {
+  background: white;
+  margin: 40px 60px;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.features h2 {
+  font-size: 28px;
+}
+
+.subtitle {
+  color: #6b7280;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  width: 30%;
+}
+
+.icon {
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+/* STATS */
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 40px 60px;
+}
+
+.stat {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  width: 30%;
+}
+
+.stat span {
+  font-size: 26px;
+  color: #2563eb;
+  font-weight: bold;
+}
+
+/* CTA */
+
+.cta {
+  background: #e9eefc;
+  margin: 40px 60px;
+  padding: 50px;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.cta p {
+  margin: 15px 0 25px;
+  color: #6b7280;
+}
+
+/* FOOTER */
+
+footer {
+  text-align: center;
+  padding: 30px;
+  background: white;
+  margin-top: 40px;
+}
+
+.footer-links a {
+  margin: 0 10px;
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.copy {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #9ca3af;
+}
