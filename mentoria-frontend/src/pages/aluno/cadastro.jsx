@@ -1,20 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react'; // Importamos o useState
 import './cadastro.css';
 import { Link } from 'react-router-dom';
 
 function Cadastro() {
+  // 1. Criamos o estado para saber quem está se cadastrando
+  const [tipoUsuario, setTipoUsuario] = useState('estudante');
+
   return (
     <div className="cadastro-container">
       <div className="cadastro-card">
         <h1>Seja Bem-Vindo</h1>
         <p>Por favor, insira seus dados para fazer seu cadastro.</p>
 
+        {/* 2. Adicionamos as abas de seleção */}
+        <div className="abas-cadastro">
+          <button 
+            className={tipoUsuario === 'estudante' ? 'aba-ativa' : ''} 
+            onClick={() => setTipoUsuario('estudante')}
+          >
+            🎓 Estudante
+          </button>
+          <button 
+            className={tipoUsuario === 'professor' ? 'aba-ativa' : ''} 
+            onClick={() => setTipoUsuario('professor')}
+          >
+            🧑‍🏫 Professor
+          </button>
+        </div>
+
         <form className="formulario">
           <label>Nome</label>
           <input type="text" placeholder="Seu nome completo" />
 
           <label>Email</label>
-          <input type="email" placeholder="student@example.com" />
+          <input 
+            type="email" 
+            /* 3. O placeholder muda conforme o estado */
+            placeholder={tipoUsuario === 'estudante' ? 'student@example.com' : 'teacher@example.com'} 
+          />
 
           <label>Senha</label>
           <input type="password" placeholder="********" />
@@ -23,7 +46,7 @@ function Cadastro() {
           <input type="password" placeholder="********" />
 
           <button type="submit" className="botao-entrar">
-            Entrar →
+            Cadastrar como {tipoUsuario === 'estudante' ? 'Estudante' : 'Professor'} →
           </button>
         </form>
 
