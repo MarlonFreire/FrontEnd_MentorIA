@@ -8,15 +8,15 @@ function Login() {
 
   return (
     <div className="login-container">
-      {/* Lado Esquerdo: Imagem e Texto (Escondido no Mobile) */}
+      
       <div className="lado-esquerdo">
-        {/* Adicionei a classe logo-png para controlarmos o fundo */}
+        
         <img src={imagemLateral} alt="Logo MentorIA" className="logo-png" />
         <h2>Aprimore sua escrita com IA</h2>
         <p>Participe do MentorIA para obter feedback inteligente sobre redações,colaboração perfeita com professores e um caminho comprovado para melhores notas.</p>
       </div>
 
-      {/* Lado Direito: Formulário */}
+      
       <div className="lado-direito">
         <h1>Bem-vindo de volta</h1>
         <p className="subtitulo">Por favor, insira seus dados para fazer login.</p>
