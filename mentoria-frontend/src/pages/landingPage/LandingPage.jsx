@@ -1,6 +1,5 @@
 import "./landing.css";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 
 export default function LandingPage() {
   return (
@@ -25,94 +24,89 @@ export default function LandingPage() {
 
       {/* HERO */}
       <section className="hero">
-        <motion.div 
-          initial={{ opacity: 0, x: -60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1>Escreva melhor com ajuda de IA</h1>
+        <div className="heroContent">
+          <h1>
+            Aprimore sua escrita com inteligência artificial
+          </h1>
+
           <p>
-            Feedback inteligente, correção automática e evolução contínua
-            na sua escrita.
+            Plataforma moderna para estudantes e professores evoluírem com feedback inteligente.
           </p>
 
           <div className="heroBtns">
             <Link to="/cadastro" className="primary">Começar grátis</Link>
-            <Link to="/login" className="secondary">Já tenho conta</Link>
+            <Link to="/login" className="secondary">Entrar</Link>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.img
-          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
-          className="heroImg"
-          initial={{ opacity: 0, x: 60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-        />
+        <div className="heroImageWrapper">
+          <img
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+            className="heroImg"
+          />
+        </div>
       </section>
+
+      {/* CORTE */}
+      <div className="wave"></div>
 
       {/* FEATURES */}
       <section className="features">
-        <h2>Recursos poderosos</h2>
+        <h2>Recursos principais</h2>
 
         <div className="cards">
+          <div className="card">
+            <div className="icon">📄</div>
+            <h3>Análise automática</h3>
+            <p>Correção inteligente da estrutura da redação.</p>
+          </div>
 
-          {[
-            { icon: "📄", title: "Análise automática", text: "Correção inteligente da estrutura do texto." },
-            { icon: "✏️", title: "Revisão humana", text: "Professores melhoram sua redação." },
-            { icon: "⚡", title: "Tempo real", text: "Feedback instantâneo enquanto escreve." }
-          ].map((item, i) => (
-            <motion.div 
-              className="card"
-              key={i}
-              whileHover={{ scale: 1.05 }}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.2 }}
-            >
-              <div className="icon">{item.icon}</div>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </motion.div>
-          ))}
+          <div className="card">
+            <div className="icon">✏️</div>
+            <h3>Revisão humana</h3>
+            <p>Professores ajudam a melhorar seu texto.</p>
+          </div>
 
+          <div className="card">
+            <div className="icon">⚡</div>
+            <h3>Tempo real</h3>
+            <p>Feedback instantâneo enquanto escreve.</p>
+          </div>
         </div>
       </section>
 
       {/* STATS */}
       <section className="stats">
-        {["10k+", "50k+", "1k+"].map((num, i) => (
-          <motion.div 
-            className="stat"
-            key={i}
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ delay: i * 0.2 }}
-          >
-            <span>{num}</span>
-            <p>RESULTADOS</p>
-          </motion.div>
-        ))}
+        <div className="stat">
+          <span>10k+</span>
+          <p>Estudantes</p>
+        </div>
+
+        <div className="stat">
+          <span>50k+</span>
+          <p>Redações</p>
+        </div>
+
+        <div className="stat">
+          <span>1k+</span>
+          <p>Professores</p>
+        </div>
       </section>
 
       {/* CTA */}
       <section className="cta">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-        >
-          <h2>Pronto para evoluir?</h2>
-          <p>Comece agora gratuitamente.</p>
-          <Link to="/cadastro" className="primary big">
-            Criar conta
-          </Link>
-        </motion.div>
+        <h2>Pronto para evoluir sua escrita?</h2>
+        <p>Comece gratuitamente agora mesmo.</p>
+
+        <Link to="/cadastro" className="primary big">
+          Criar conta
+        </Link>
       </section>
 
       {/* FOOTER */}
       <footer className="footer">
         <div className="logo">MentorIA</div>
-        <p>© 2026</p>
+        <p>© 2026 - Todos os direitos reservados</p>
       </footer>
 
     </div>
