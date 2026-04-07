@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/enviar-redacao" element={<Redacao />} />
          
