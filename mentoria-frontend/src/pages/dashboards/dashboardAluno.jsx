@@ -12,3 +12,5 @@ function DashboardAluno() {
   )
 
 }
+
+export default DashboardAluno
