@@ -1,0 +1,255 @@
+:root {
+  --blue-primary: #2563eb;
+  --bg-body: #f8fafc;
+  --border-light: #e2e8f0;
+  --text-dark: #1e293b;
+  --text-gray: #64748b;
+  --ai-light-blue: #eff6ff;
+}
+
+.envio-container {
+  min-height: 100vh;
+  background-color: var(--bg-body);
+  color: var(--text-dark);
+}
+
+/* Header Styles */
+.mentor-header {
+  background: white;
+  padding: 1rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.mentor-nav {
+  margin-left: auto;
+}
+
+.mentor-profile {
+  margin-left: 1.6rem;
+}
+
+.mentor-logo {
+  color: var(--blue-primary);
+  font-weight: 700;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mentor-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+}
+
+.mentor-nav ul li a {
+  text-decoration: none;
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.mentor-nav ul li a.active {
+  color: var(--blue-primary);
+  border-bottom: 2px solid var(--blue-primary);
+  padding-bottom: 22px;
+}
+
+.mentor-profile img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Main Layout */
+.mentor-main {
+  max-width: 1200px;
+  margin: 2.5rem auto;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+  padding: 0 1.5rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-gray);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+/* Editor Container */
+.editor-card {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.editor-toolbar {
+  padding: 0.75rem 1rem;
+  background: #fff;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-gray);
+}
+
+.tools-left, .tools-right {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.tools-left i, .tools-right i {
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.separator {
+  color: #cbd5e1;
+}
+
+.editor-input {
+  width: 100%;
+  height: 480px;
+  padding: 1.5rem;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+}
+
+.editor-footer {
+  padding: 0.75rem 1.2rem;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-gray);
+}
+
+/* Buttons */
+.button-group {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.btn-primary {
+  background: var(--blue-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Sidebar Styling */
+.card-sidebar {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-sidebar h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.guidelines {
+  list-style: none;
+  padding: 0;
+}
+
+.guidelines li {
+  display: flex;
+  gap: 12px;
+  font-size: 0.85rem;
+  margin-bottom: 1.1rem;
+  line-height: 1.4;
+}
+
+.guidelines li i {
+  color: #10b981;
+  font-size: 1rem;
+  margin-top: 2px;
+}
+
+/* AI Specific Box */
+.ai-card {
+  background: var(--ai-light-blue);
+  border-color: #dbeafe;
+}
+
+.ai-title {
+  color: var(--blue-primary) !important;
+}
+
+.ai-card p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.ai-quote {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--text-gray);
+  border: 1px solid #dbeafe;
+  margin-bottom: 1.25rem;
+}
+
+.ai-action-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--blue-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
