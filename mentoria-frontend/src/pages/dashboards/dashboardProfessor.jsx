@@ -36,7 +36,6 @@ function DashboardProfessor() {
   return (
     <div className="dashboard-layout">
       
-      {/* SIDEBAR ESQUERDA */}
       <aside className="sidebar">
         <div className="sidebar-logo">
           <h2>Mentor<span>IA</span></h2>
@@ -74,11 +73,10 @@ function DashboardProfessor() {
         </header>
 
         <section className="welcome-section">
-          <h1>Bem vindo de volta, Professora</h1>
+          <h1>Bem vindo de volta!</h1>
           <p>Segue abaixo uma visão geral das turmas</p>
         </section>
 
-        {/* ESTATÍSTICAS RÁPIDAS (As caixinhas brancas do Figma) */}
         <div className="stats-grid">
           <div className="stat-card">
             <span>Média das Redações</span>
@@ -98,7 +96,7 @@ function DashboardProfessor() {
           <h2>Suas Turmas</h2>
         </div>
 
-        {/* GRID DE TURMAS */}
+      
         <div className="grid-turmas">
           {turmas.map((turma) => (
             <div key={turma.id} className="card-turma">
@@ -124,22 +122,36 @@ function DashboardProfessor() {
         </div>
       </main>
 
-      {/* MODAL DE CRIAÇÃO */}
-      {modalAberto && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>Criar Nova Turma</h3>
-            <form onSubmit={criarTurma}>
-              <input type="text" placeholder="Nome da Turma" value={novoNome} onChange={(e) => setNovoNome(e.target.value)} required />
-              <input type="text" placeholder="Disciplina" value={novaDisciplina} onChange={(e) => setNovaDisciplina(e.target.value)} required />
-              <div className="modal-actions">
-                <button type="button" onClick={() => setModalAberto(false)}>Cancelar</button>
-                <button type="submit" className="btn-confirmar">Criar Agora</button>
-              </div>
-            </form>
-          </div>
+      
+{modalAberto && (
+  <div className="modal-overlay">
+    {/* Nova classe: modal-container */}
+    <div className="modal-container modal-content"> 
+      <div className="modal-header">
+        <h3>Criar Nova Turma</h3>
+        <button className="botao-fechar-modal" onClick={() => setModalAberto(false)}>&times;</button>
+      </div>
+      
+      {/* Classe para os inputs: formulario-modal-turma */}
+      <form onSubmit={criarTurma} className="formulario-modal-turma">
+        <div className="campo-input">
+          <label>Nome da Turma</label>
+          <input type="text" placeholder="Ex: 3º Ano Ensino Médio" value={novoNome} onChange={(e) => setNovoNome(e.target.value)} required />
         </div>
-      )}
+
+        <div className="campo-input">
+          <label>Disciplina</label>
+          <input type="text" placeholder="Ex: Redação / Literatura" value={novaDisciplina} onChange={(e) => setNovaDisciplina(e.target.value)} required />
+        </div>
+
+        <div className="modal-actions">
+          <button type="button" className="botao-cancelar-modal" onClick={() => setModalAberto(false)}>Cancelar</button>
+          <button type="submit" className="botao-confirmar-modal">Criar Turma</button>
+        </div>
+      </form>
+    </div>
+  </div>
+    )}
     </div>
   );
 }
