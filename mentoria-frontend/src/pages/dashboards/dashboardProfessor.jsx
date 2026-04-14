@@ -9,7 +9,7 @@ function DashboardProfessor() {
     { id: 2, nome: '2º Ano B', disciplina: 'Literatura', codigo: 'FF2A1C90', alunos: 28, redacoes: 8, cor: '#00c48c' }
   ]);
 
-  // 2. Estados para o Modal e Inputs
+  
   const [modalAberto, setModalAberto] = useState(false);
   const [novoNome, setNovoNome] = useState('');
   const [novaDisciplina, setNovaDisciplina] = useState('');
@@ -59,7 +59,6 @@ function DashboardProfessor() {
         </button>
       </aside>
 
-      {/* CONTEÚDO PRINCIPAL (DIREITA) */}
       <main className="main-content">
         <header className="main-header">
           <div className="busca-bar">
@@ -125,7 +124,6 @@ function DashboardProfessor() {
       
 {modalAberto && (
   <div className="modal-overlay">
-    {/* Nova classe: modal-container */}
     <div className="modal-container modal-content"> 
       <div className="modal-header">
         <h3>Criar Nova Turma</h3>
