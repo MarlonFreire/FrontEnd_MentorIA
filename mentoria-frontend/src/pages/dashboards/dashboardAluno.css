@@ -1,0 +1,83 @@
+/* Reaproveite as classes de layout do Professor (Sidebar e Main-content) */
+
+.avatar-prof-card {
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  background: white;
+  border: 3px solid #f8fafd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a73e8;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card-turma-aluno {
+  background: white;
+  border-radius: 16px;
+  overflow: visible; /* Necessário para o avatar aparecer saindo do card */
+  border: 1px solid #eef0f3;
+  position: relative;
+}
+
+.card-topo {
+  padding: 30px 20px;
+  border-radius: 16px 16px 0 0;
+  color: white;
+  position: relative;
+}
+
+.card-corpo {
+  padding: 30px 20px 20px;
+}
+
+.nome-professor {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.stats-card-aluno {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+  color: #888;
+  font-size: 13px;
+}
+
+.botao-participar-topo {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* MODAL Estilo Alice */
+.form-participar input {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.btn-participar-confirmar {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+}
