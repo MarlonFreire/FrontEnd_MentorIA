@@ -1,9 +1,263 @@
-/* Reaproveite as classes de layout do Professor (Sidebar e Main-content) */
+/* --- LAYOUT BASE --- */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8fafd;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+  width: 260px;
+  background-color: white;
+  border-right: 1px solid #eef0f3;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  z-index: 100;
+}
+
+.sidebar-logo h2 {
+  color: #1a73e8;
+  margin-bottom: 40px;
+  font-size: 24px;
+}
+.sidebar-logo span { color: #333; }
+
+.sidebar-perfil {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  padding: 12px;
+  background-color: #f8fafd;
+  border-radius: 12px;
+}
+
+.avatar-circulo {
+  width: 45px;
+  height: 45px;
+  background-color: #1a73e8;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.nav-item {
+  border: none;
+  background: none;
+  padding: 12px;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-item.ativo {
+  background-color: #e8f0fe;
+  color: #1a73e8;
+  font-weight: bold;
+}
+
+.botao-nova-turma-sidebar {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* --- CONTEÚDO --- */
+.main-content {
+  flex: 1;
+  margin-left: 260px; /* Dá espaço para a sidebar fixa */
+  padding: 40px 60px;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.perfil-mini {
+  width: 40px;
+  height: 40px;
+  background-color: #1a73e8;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* --- CARDS DE ESTATÍSTICAS --- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid #eef0f3;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.stat-card h2 {
+  font-size: 32px;
+  margin-top: 10px;
+}
+
+/* --- GRID DE TURMAS --- */
+.grid-turmas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.card-turma {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #eef0f3;
+}
+
+.card-topo {
+  padding: 20px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-corpo {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.codigo-box {
+  background: #f8fafd;
+  border: 1px dashed #ccc;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.card-footer {
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-around;
+  font-size: 13px;
+  color: #666;
+}
+
+/* --- MODAL --- */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 400px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.formulario-modal-turma {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.campo-input input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.botao-confirmar-modal {
+  background: #1a73e8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Importa as bases do professor se necessário ou apenas adicione abaixo */
+
+.botao-participar-topo {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.botao-participar-topo:hover {
+  background-color: #1557b0;
+}
+
+.card-turma-aluno {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #eef0f3;
+  position: relative;
+  overflow: visible; /* Importante para o avatar sair do card */
+}
 
 .avatar-prof-card {
   position: absolute;
-  bottom: -20px;
   right: 20px;
+  bottom: -20px;
   width: 45px;
   height: 45px;
   background: white;
@@ -12,72 +266,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #1a73e8;
   font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.card-turma-aluno {
-  background: white;
-  border-radius: 16px;
-  overflow: visible; /* Necessário para o avatar aparecer saindo do card */
-  border: 1px solid #eef0f3;
-  position: relative;
-}
-
-.card-topo {
-  padding: 30px 20px;
-  border-radius: 16px 16px 0 0;
-  color: white;
-  position: relative;
-}
-
-.card-corpo {
-  padding: 30px 20px 20px;
-}
-
-.nome-professor {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 15px;
+  color: #1a73e8;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .stats-card-aluno {
   display: flex;
-  gap: 15px;
-  margin-top: 15px;
+  gap: 20px;
   color: #888;
   font-size: 13px;
 }
 
-.botao-participar-topo {
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* MODAL Estilo Alice */
-.form-participar input {
-  width: 100%;
-  padding: 15px;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 16px;
-  margin-top: 10px;
-}
-
-.btn-participar-confirmar {
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  margin-top: 20px;
-  cursor: pointer;
+.nome-professor {
+  font-weight: 500;
+  color: #444;
 }

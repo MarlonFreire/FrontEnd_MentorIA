@@ -1,155 +1,119 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './dashboardProfessor.css';
-import imagemProfessora from '../../imagens/MentorIA.png'; // Use a foto da Sarah aqui se tiver
 
 function DashboardProfessor() {
-  // 1. Estado das turmas
-  const [turmas, setTurmas] = useState([
-    { id: 1, nome: '3º Ano A', disciplina: 'Redação', codigo: 'EC3F1E30', alunos: 32, redacoes: 12, cor: '#1a73e8' },
-    { id: 2, nome: '2º Ano B', disciplina: 'Literatura', codigo: 'FF2A1C90', alunos: 28, redacoes: 8, cor: '#00c48c' }
-  ]);
-
-  
+  const [turmas, setTurmas] = useState([]);
+  const [professor, setProfessor] = useState(null);
   const [modalAberto, setModalAberto] = useState(false);
-  const [novoNome, setNovoNome] = useState('');
-  const [novaDisciplina, setNovaDisciplina] = useState('');
+  const [nomeTurma, setNomeTurma] = useState('');
+  const [serie, setSerie] = useState('');
+
+  // 1. Carregar dados do Professor Logado e suas Turmas
+  const carregarDados = async () => {
+    const userLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+    
+    if (userLogado) {
+      // Busca o perfil do professor vinculado ao id_usuario
+      const respProf = await fetch(`http://localhost:5000/tb_professores?id_usuario=${userLogado.id}`);
+      const dadosProf = await respProf.json();
+      if (dadosProf.length > 0) setProfessor(dadosProf[0]);
+
+      // Busca as turmas
+      const respTurmas = await fetch(`http://localhost:5000/tb_turmas?id_professor=${dadosProf[0].id}`);
+      const dadosTurmas = await respTurmas.json();
+      setTurmas(dadosTurmas);
+    }
+  };
+
+  useEffect(() => { carregarDados(); }, []);
 
   const gerarCodigoUnico = () => Math.random().toString(36).substring(2, 10).toUpperCase();
 
-  const criarTurma = (e) => {
+  const criarTurma = async (e) => {
     e.preventDefault();
     const novaTurma = {
-      id: Date.now(),
-      nome: novoNome,
-      disciplina: novaDisciplina,
-      codigo: gerarCodigoUnico(),
-      alunos: 0,
-      redacoes: 0,
-      cor: '#4d7cfe' 
+      nome_turma: nomeTurma,
+      serie: serie,
+      codigo_turma: gerarCodigoUnico(),
+      id_professor: professor.id // Vincula ao ID real do professor
     };
-    setTurmas([...turmas, novaTurma]);
+
+    await fetch('http://localhost:5000/tb_turmas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(novaTurma)
+    });
+
     setModalAberto(false);
-    setNovoNome('');
-    setNovaDisciplina('');
+    setNomeTurma('');
+    setSerie('');
+    carregarDados();
   };
 
   return (
     <div className="dashboard-layout">
-      
       <aside className="sidebar">
-        <div className="sidebar-logo">
-          <h2>Mentor<span>IA</span></h2>
-        </div>
-
+        <div className="sidebar-logo"><h2>Mentor<span>IA</span></h2></div>
         <div className="sidebar-perfil">
-          <div className="avatar-circulo">S</div>
+          <div className="avatar-circulo">{professor ? professor.nome_professor.charAt(0) : 'P'}</div>
           <div className="perfil-info">
-            <strong>Sarah Jenkins</strong>
-            <span>Professora de redação</span>
+            <strong>{professor ? professor.nome_professor : 'Carregando...'}</strong>
+            <span>{professor ? professor.disciplina : 'Professor'}</span>
           </div>
         </div>
-
         <nav className="sidebar-nav">
-          <button className="nav-item"><i>🏠</i> Início</button>
-          <button className="nav-item ativo"><i>👥</i> Minhas turmas</button>
+          <button className="nav-item ativo"><i>👥</i> Turmas</button>
         </nav>
-
-        <button className="botao-nova-turma-sidebar" onClick={() => setModalAberto(true)}>
-          + Nova turma
-        </button>
+        <button className="botao-nova-turma-sidebar" onClick={() => setModalAberto(true)}>+ Nova Turma</button>
       </aside>
 
       <main className="main-content">
         <header className="main-header">
-          <div className="busca-bar">
-            <input type="text" placeholder="Buscar turmas, alunos..." />
-          </div>
-          <div className="header-icons">
-            <button className="icon-btn">🔔</button>
-            <button className="icon-btn">⚙️</button>
-            <div className="perfil-mini">S</div>
-          </div>
+          <h1>Minhas Turmas Ativas</h1>
+          <div className="perfil-mini">{professor ? professor.nome_professor.charAt(0) : ''}</div>
         </header>
 
-        <section className="welcome-section">
-          <h1>Bem vindo de volta!</h1>
-          <p>Segue abaixo uma visão geral das turmas</p>
-        </section>
-
-        <div className="stats-grid">
-          <div className="stat-card">
-            <span>Média das Redações</span>
-            <h2>85/100 <small>+5%</small></h2>
-          </div>
-          <div className="stat-card">
-            <span>Tempo de IA</span>
-            <h2>1.2s <small>-0.3s</small></h2>
-          </div>
-          <div className="stat-card">
-            <span>Revisões Pendentes</span>
-            <h2>12 <small className="alert">Ação necessária</small></h2>
-          </div>
-        </div>
-
-        <div className="turmas-header">
-          <h2>Suas Turmas</h2>
-        </div>
-
-      
         <div className="grid-turmas">
-          {turmas.map((turma) => (
-            <div key={turma.id} className="card-turma">
-              <div className="card-topo" style={{ backgroundColor: turma.cor }}>
-                <div className="card-info">
-                  <h3>{turma.nome}</h3>
-                  <p>{turma.disciplina}</p>
-                </div>
-                <button className="btn-opcoes">⋮</button>
+          {turmas.map((t) => (
+            <div key={t.id} className="card-turma">
+              <div className="card-topo" style={{ backgroundColor: '#1a73e8' }}>
+                <h3>{t.nome_turma}</h3>
+                <p>{t.serie}</p>
               </div>
               <div className="card-corpo">
                 <div className="codigo-box">
-                  <small>CÓDIGO</small>
-                  <strong>{turma.codigo}</strong>
+                  <small>CÓDIGO DA SALA</small>
+                  <strong>{t.codigo_turma}</strong>
                 </div>
-              </div>
-              <div className="card-footer">
-                <span>👥 {turma.alunos}</span>
-                <span>📄 {turma.redacoes}</span>
               </div>
             </div>
           ))}
         </div>
       </main>
 
-      
-{modalAberto && (
-  <div className="modal-overlay">
-    <div className="modal-container modal-content"> 
-      <div className="modal-header">
-        <h3>Criar Nova Turma</h3>
-        <button className="botao-fechar-modal" onClick={() => setModalAberto(false)}>&times;</button>
-      </div>
-      
-      {/* Classe para os inputs: formulario-modal-turma */}
-      <form onSubmit={criarTurma} className="formulario-modal-turma">
-        <div className="campo-input">
-          <label>Nome da Turma</label>
-          <input type="text" placeholder="Ex: 3º Ano Ensino Médio" value={novoNome} onChange={(e) => setNovoNome(e.target.value)} required />
+      {modalAberto && (
+        <div className="modal-overlay">
+          <div className="modal-container">
+            <div className="modal-header">
+              <h3>Criar Nova Turma</h3>
+              <button onClick={() => setModalAberto(false)}>&times;</button>
+            </div>
+            <form onSubmit={criarTurma} className="formulario-modal-turma">
+              <div className="campo-input">
+                <label>Nome (Ex: 3º Ano B)</label>
+                <input type="text" value={nomeTurma} onChange={e => setNomeTurma(e.target.value)} required />
+              </div>
+              <div className="campo-input">
+                <label>Série (Ex: Ensino Médio)</label>
+                <input type="text" value={serie} onChange={e => setSerie(e.target.value)} required />
+              </div>
+              <div className="modal-actions">
+                <button type="submit" className="botao-confirmar-modal">Criar no Banco</button>
+              </div>
+            </form>
+          </div>
         </div>
-
-        <div className="campo-input">
-          <label>Disciplina</label>
-          <input type="text" placeholder="Ex: Redação / Literatura" value={novaDisciplina} onChange={(e) => setNovaDisciplina(e.target.value)} required />
-        </div>
-
-        <div className="modal-actions">
-          <button type="button" className="botao-cancelar-modal" onClick={() => setModalAberto(false)}>Cancelar</button>
-          <button type="submit" className="botao-confirmar-modal">Criar Turma</button>
-        </div>
-      </form>
-    </div>
-  </div>
-    )}
+      )}
     </div>
   );
 }

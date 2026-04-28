@@ -4,18 +4,52 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function Cadastro() {
   const [tipoUsuario, setTipoUsuario] = useState('estudante');
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
   const navigate = useNavigate(); 
 
-  const lidarComCadastro = (e) => {
+  const lidarComCadastro = async (e) => {
     e.preventDefault();
 
-   
-    console.log("Cadastrando como:", tipoUsuario);
+    try {
+      // 1. Criar na tabela 'usuarios' (Login/Senha)
+      const novoUser = { email, senha, tipo_usuario: tipoUsuario === 'estudante' ? 'aluno' : 'professor' };
+      
+      const respUser = await fetch('http://localhost:5000/usuarios', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(novoUser)
+      });
+      const userCriado = await respUser.json();
 
-    if (tipoUsuario === 'professor') {
-      navigate('/dashboard-professor');
-    } else {
-      navigate('/dashboard-aluno'); 
+      // 2. Criar na tabela específica (tb_professores ou tb_alunos)
+      if (tipoUsuario === 'professor') {
+        await fetch('http://localhost:5000/tb_professores', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            nome_professor: nome, 
+            disciplina: "Geral", 
+            id_usuario: userCriado.id 
+          })
+        });
+        navigate('/login');
+      } else {
+        await fetch('http://localhost:5000/tb_alunos', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            nome_aluno: nome, 
+            matricula: `MAT-${Math.floor(Math.random() * 1000)}`, 
+            id_usuario: userCriado.id 
+          })
+        });
+        navigate('/login');
+      }
+      alert("Cadastro realizado! Agora faça login.");
+    } catch (error) {
+      alert("Erro ao cadastrar!");
     }
   };
 
@@ -23,49 +57,29 @@ function Cadastro() {
     <div className="cadastro-container">
       <div className="cadastro-card">
         <h1>Seja Bem-Vindo</h1>
-        <p>Por favor, insira seus dados para fazer seu cadastro.</p>
+        <p>Insira seus dados para criar sua conta no MentorIA.</p>
 
         <div className="abas-cadastro">
-          <button 
-            className={tipoUsuario === 'estudante' ? 'aba-ativa' : ''} 
-            onClick={() => setTipoUsuario('estudante')}
-          >
-            🎓 Estudante
-          </button>
-          <button 
-            className={tipoUsuario === 'professor' ? 'aba-ativa' : ''} 
-            onClick={() => setTipoUsuario('professor')}
-          >
-            🧑‍🏫 Professor
-          </button>
+          <button className={tipoUsuario === 'estudante' ? 'aba-ativa' : ''} onClick={() => setTipoUsuario('estudante')}>🎓 Estudante</button>
+          <button className={tipoUsuario === 'professor' ? 'aba-ativa' : ''} onClick={() => setTipoUsuario('professor')}>🧑‍🏫 Professor</button>
         </div>
 
-        {/* 4. Adicionar o onSubmit no formulário */}
         <form className="formulario" onSubmit={lidarComCadastro}>
           <label>Nome</label>
-          <input type="text" placeholder="Seu nome completo" required />
+          <input type="text" placeholder="Seu nome completo" value={nome} onChange={(e) => setNome(e.target.value)} required />
 
           <label>Email</label>
-          <input 
-            type="email" 
-            placeholder={tipoUsuario === 'estudante' ? 'student@example.com' : 'teacher@example.com'} 
-            required
-          />
+          <input type="email" placeholder="email@exemplo.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
           <label>Senha</label>
-          <input type="password" placeholder="********" required />
+          <input type="password" placeholder="********" value={senha} onChange={(e) => setSenha(e.target.value)} required />
           
-          <label>Confirme a senha</label>
-          <input type="password" placeholder="********" required />
-
           <button type="submit" className="botao-entrar">
             Cadastrar como {tipoUsuario === 'estudante' ? 'Estudante' : 'Professor'} →
           </button>
         </form>
 
-        <p className="voltar-login">
-          Já possui uma conta? <Link to="/login">Login</Link>
-        </p>
+        <p className="voltar-login">Já possui uma conta? <Link to="/login">Login</Link></p>
       </div>
     </div>
   );

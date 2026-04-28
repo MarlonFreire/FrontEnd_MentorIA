@@ -1,22 +1,11 @@
-/* --- RESET E ESTILOS GERAIS --- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', sans-serif; 
-  color: #333;
-}
-
+/* --- LAYOUT BASE --- */
 .dashboard-layout {
   display: flex;
-  background-color: #fcfdfe; 
   min-height: 100vh;
+  background-color: #f8fafd;
 }
 
-
+/* --- SIDEBAR --- */
 .sidebar {
   width: 260px;
   background-color: white;
@@ -24,15 +13,13 @@ body {
   padding: 30px 20px;
   display: flex;
   flex-direction: column;
-  position: fixed; 
-  top: 0;
-  left: 0;
+  position: fixed;
   height: 100vh;
-  z-index: 100; 
+  z-index: 100;
 }
 
 .sidebar-logo h2 {
-  color: #1a73e8; 
+  color: #1a73e8;
   margin-bottom: 40px;
   font-size: 24px;
 }
@@ -60,14 +47,11 @@ body {
   font-weight: bold;
 }
 
-.perfil-info strong { display: block; font-size: 14px; }
-.perfil-info span { font-size: 12px; color: #666; }
-
 .sidebar-nav {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  flex: 1; 
+  flex: 1;
 }
 
 .nav-item {
@@ -78,13 +62,11 @@ body {
   border-radius: 8px;
   cursor: pointer;
   color: #555;
-  font-size: 14px;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.nav-item:hover { background-color: #f1f5f9; }
 .nav-item.ativo {
   background-color: #e8f0fe;
   color: #1a73e8;
@@ -99,60 +81,35 @@ body {
   border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 14px;
 }
 
-
+/* --- CONTEÚDO --- */
 .main-content {
   flex: 1;
-  margin-left: 260px; 
-  padding: 30px 50px;
+  margin-left: 260px; /* Dá espaço para a sidebar fixa */
+  padding: 40px 60px;
 }
-
 
 .main-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 40px;
 }
 
-.busca-bar input {
-  width: 400px;
-  padding: 12px 20px;
-  border-radius: 20px;
-  border: 1px solid #eef0f3;
-  background-color: #f8fafc;
-}
-
-.header-icons {
+.perfil-mini {
+  width: 40px;
+  height: 40px;
+  background-color: #1a73e8;
+  color: white;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 15px;
-}
-
-.icon-btn {
-  background: white;
-  border: 1px solid #eef0f3;
-  padding: 8px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.perfil-mini {
-  width: 35px; height: 35px;
-  background-color: #1a73e8; color: white;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
+  justify-content: center;
   font-weight: bold;
 }
 
-
-.welcome-section { margin-bottom: 30px; }
-.welcome-section h1 { font-size: 24px; margin-bottom: 5px; }
-.welcome-section p { color: #666; font-size: 14px; }
-
-/* --- GRID DE ESTATÍSTICAS --- */
+/* --- CARDS DE ESTATÍSTICAS --- */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -161,52 +118,39 @@ body {
 }
 
 .stat-card {
-  background-color: white;
+  background: white;
   padding: 25px;
   border-radius: 16px;
   border: 1px solid #eef0f3;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
-.stat-card span { font-size: 13px; color: #666; }
-.stat-card h2 { margin-top: 10px; font-size: 28px; }
-.stat-card h2 small { font-size: 12px; color: #00c48c; }
-.stat-card .alert { color: #ff9500; font-weight: normal; }
+.stat-card h2 {
+  font-size: 32px;
+  margin-top: 10px;
+}
 
-
-.turmas-header { margin-bottom: 20px; }
-.turmas-header h2 { font-size: 20px; }
-
+/* --- GRID DE TURMAS --- */
 .grid-turmas {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 25px;
+  margin-top: 20px;
 }
 
-/* --- CARD DE TURMA (IGUAL AO FIGMA) --- */
 .card-turma {
-  background-color: white;
+  background: white;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid #eef0f3;
-  transition: all 0.3s ease;
-}
-
-.card-turma:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.03);
 }
 
 .card-topo {
-  padding: 25px;
+  padding: 20px;
   color: white;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
 }
-
-.card-topo h3 { font-size: 16px; }
-.card-topo p { font-size: 12px; opacity: 0.8; }
-.btn-opcoes { background: none; border: none; color: white; cursor: pointer; font-size: 20px; }
 
 .card-corpo {
   padding: 20px;
@@ -215,105 +159,72 @@ body {
 }
 
 .codigo-box {
-  text-align: center;
-  background-color: #fbfcfe;
+  background: #f8fafd;
+  border: 1px dashed #ccc;
   padding: 10px 20px;
   border-radius: 8px;
-  border: 1px dashed #ced4da;
+  text-align: center;
 }
-
-.codigo-box small { color: #888; display: block; font-size: 10px; }
-.codigo-box strong { font-size: 14px; color: #333; }
 
 .card-footer {
   padding: 15px 20px;
-  border-top: 1px solid #eef0f3;
+  border-top: 1px solid #eee;
   display: flex;
-  gap: 20px;
-  color: #888;
+  justify-content: space-around;
   font-size: 13px;
+  color: #666;
 }
 
-
+/* --- MODAL --- */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); 
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 .modal-container {
   background: white;
   padding: 30px;
-  border-radius: 16px;
+  border-radius: 20px;
   width: 400px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25px;
-}
-
-.modal-header h3 { font-size: 18px; }
-.botao-fechar-modal {
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #888;
-  cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .formulario-modal-turma {
   display: flex;
   flex-direction: column;
-  gap: 15px; 
-}
-
-.campo-input label {
-  display: block;
-  font-size: 12px;
-  color: #666;
-  margin-bottom: 5px;
+  gap: 15px;
 }
 
 .campo-input input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #eef0f3;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #fbfcfe;
+  margin-top: 5px;
 }
 
 .modal-actions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  margin-top: 25px;
-}
-
-.botao-cancelar-modal {
-  background: none;
-  border: none;
-  color: #888;
-  cursor: pointer;
-  font-size: 14px;
+  margin-top: 20px;
 }
 
 .botao-confirmar-modal {
-  background-color: #1a73e8;
+  background: #1a73e8;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
 }
