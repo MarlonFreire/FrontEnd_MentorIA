@@ -93,6 +93,16 @@
       "redacoes_total": 0,
       "redacoes_pendentes": 0,
       "id": "1MkBJx5kpdk"
+    },
+    {
+      "nome_turma": "letras",
+      "serie": "superior",
+      "codigo_turma": "BZUV1DMS",
+      "id_professor": "-TtydJtXSHU",
+      "alunos_cont": 1,
+      "redacoes_total": 0,
+      "redacoes_pendentes": 0,
+      "id": "NauOdTaFunc"
     }
   ],
   "tb_aluno_turma": [],
