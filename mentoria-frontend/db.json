@@ -55,11 +55,44 @@
   ],
   "tb_turmas": [
     {
-      "nome_turma": "2 ano d",
-      "serie": "Ensino médio",
-      "codigo_turma": "IK0PQWQP",
+      "nome_turma": "2 anod",
+      "serie": "medio",
+      "codigo_turma": "X1WXSV11",
       "id_professor": "-TtydJtXSHU",
-      "id": "B9p1dzgZvKs"
+      "alunos_cont": 1,
+      "redacoes_total": 0,
+      "redacoes_pendentes": 0,
+      "id": "rRsyyt6k0G8"
+    },
+    {
+      "nome_turma": "3 ano b",
+      "serie": "medio",
+      "codigo_turma": "YKNVA392",
+      "id_professor": "-TtydJtXSHU",
+      "alunos_cont": 1,
+      "redacoes_total": 0,
+      "redacoes_pendentes": 0,
+      "id": "S9O64qLtSZw"
+    },
+    {
+      "nome_turma": "2 c",
+      "serie": "medio",
+      "codigo_turma": "5XTHB7IE",
+      "id_professor": "-TtydJtXSHU",
+      "alunos_cont": 1,
+      "redacoes_total": 0,
+      "redacoes_pendentes": 0,
+      "id": "pnsQW36HUxU"
+    },
+    {
+      "nome_turma": "Letras",
+      "serie": "Superior",
+      "codigo_turma": "U56A6ZS4",
+      "id_professor": "-TtydJtXSHU",
+      "alunos_cont": 1,
+      "redacoes_total": 0,
+      "redacoes_pendentes": 0,
+      "id": "1MkBJx5kpdk"
     }
   ],
   "tb_aluno_turma": [],

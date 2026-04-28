@@ -7,108 +7,150 @@ function DashboardAluno() {
   const [modalAberto, setModalAberto] = useState(false);
   const [codigoBusca, setCodigoBusca] = useState('');
 
-  const carregarDadosAluno = async () => {
-    const userLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+  
+ const carregarDados = async () => {
+  const userLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+  if (userLogado) {
+    const respA = await fetch(`http://localhost:5000/tb_alunos?id_usuario=${userLogado.id}`);
+    const dadosA = await respA.json();
     
-    if (userLogado) {
-      // 1. Busca perfil do aluno
-      const respAluno = await fetch(`http://localhost:5000/tb_alunos?id_usuario=${userLogado.id}`);
-      const dadosAluno = await respAluno.json();
-      if (dadosAluno.length > 0) setAluno(dadosAluno[0]);
-
-      // 2. Busca IDs das turmas vinculadas no localStorage deste aluno específico
-      const storageKey = `vinculos_aluno_${dadosAluno[0].id}`;
-      const vinculos = JSON.parse(localStorage.getItem(storageKey)) || [];
+    if (dadosA.length > 0) {
+      const alunoAtual = dadosA[0];
+      setAluno(alunoAtual);
       
-      if (vinculos.length > 0) {
-        const query = vinculos.map(id => `id=${id}`).join('&');
-        const respTurmas = await fetch(`http://localhost:5000/tb_turmas?${query}`);
-        const turmasData = await respTurmas.json();
-        setTurmas(turmasData);
+      const storageKey = `vinculos_aluno_${alunoAtual.id}`;
+      const idsQueEuEntrei = JSON.parse(localStorage.getItem(storageKey)) || [];
+      
+      if (idsQueEuEntrei.length > 0) {
+        // BUSCA TODAS AS TURMAS DO BANCO
+        const respT = await fetch(`http://localhost:5000/tb_turmas`);
+        const todasAsTurmasDoBanco = await respT.json();
+        
+        // FILTRA: Só deixa as turmas que o ID está na minha lista do localStorage
+        const minhasTurmasFiltradas = todasAsTurmasDoBanco.filter(turma => 
+          idsQueEuEntrei.includes(turma.id)
+        );
+        
+        console.log("Turmas que o aluno entrou:", minhasTurmasFiltradas);
+        setTurmas(minhasTurmasFiltradas); 
+      } else {
+        setTurmas([]);
       }
+    }
+  }
+};
+
+  useEffect(() => { carregarDados(); }, []);
+
+  
+  const entrarNaTurma = async (e) => {
+    e.preventDefault();
+    try {
+      const resp = await fetch(`http://localhost:5000/tb_turmas?codigo_turma=${codigoBusca.toUpperCase()}`);
+      const resultado = await resp.json();
+
+      if (resultado.length > 0) {
+        const turmaEncontrada = resultado[0];
+        const storageKey = `vinculos_aluno_${aluno.id}`;
+        const idsAtuais = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+        if (!idsAtuais.includes(turmaEncontrada.id)) {
+          const novosIds = [...idsAtuais, turmaEncontrada.id];
+          localStorage.setItem(storageKey, JSON.stringify(novosIds));
+
+          
+          await fetch(`http://localhost:5000/tb_turmas/${turmaEncontrada.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ alunos_cont: (turmaEncontrada.alunos_cont || 0) + 1 })
+          });
+
+          alert("Matrícula confirmada!");
+          await carregarDados(); 
+        } else {
+          alert("Você já está nesta turma!");
+        }
+        setModalAberto(false);
+        setCodigoBusca('');
+      } else {
+        alert("Código não encontrado!");
+      }
+    } catch (erro) {
+      alert("Erro ao processar matrícula.");
     }
   };
 
-  useEffect(() => { carregarDadosAluno(); }, []);
-
-  const participarDaTurma = async (e) => {
-    e.preventDefault();
-    const resp = await fetch(`http://localhost:5000/tb_turmas?codigo_turma=${codigoBusca.toUpperCase()}`);
-    const resultado = await resp.json();
-
-    if (resultado.length > 0) {
-      const turmaEncontrada = resultado[0];
+  // 3. SAIR DA TURMA
+  const sairDaTurma = async (idTurma) => {
+    if (window.confirm("Deseja sair desta turma?")) {
       const storageKey = `vinculos_aluno_${aluno.id}`;
       const idsAtuais = JSON.parse(localStorage.getItem(storageKey)) || [];
+      const novosIds = idsAtuais.filter(id => id !== idTurma);
+      
+      localStorage.setItem(storageKey, JSON.stringify(novosIds));
+      
+      // Opcional: Avisar o banco que um aluno saiu
+      const turmaAlvo = turmas.find(t => t.id === idTurma);
+      await fetch(`http://localhost:5000/tb_turmas/${idTurma}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ alunos_cont: Math.max(0, (turmaAlvo.alunos_cont || 1) - 1) })
+      });
 
-      if (!idsAtuais.includes(turmaEncontrada.id)) {
-        const novosIds = [...idsAtuais, turmaEncontrada.id];
-        localStorage.setItem(storageKey, JSON.stringify(novosIds));
-        alert("Matrícula realizada com sucesso!");
-        carregarDadosAluno();
-      } else {
-        alert("Você já está nesta turma.");
-      }
-      setModalAberto(false);
-      setCodigoBusca('');
-    } else {
-      alert("Código da tb_turmas não encontrado.");
+      carregarDados();
     }
   };
 
   return (
-    <div className="dashboard-layout">
-      <aside className="sidebar">
-        <div className="sidebar-logo"><h2>Mentor<span>IA</span></h2></div>
-        <div className="sidebar-perfil">
-          <div className="avatar-circulo">{aluno ? aluno.nome_aluno.charAt(0) : 'A'}</div>
-          <div className="perfil-info">
-            <strong>{aluno ? aluno.nome_aluno : 'Carregando...'}</strong>
-            <span>{aluno ? `Matrícula: ${aluno.matricula}` : 'Estudante'}</span>
+    <div className="dashboard-container">
+      <aside className="sidebar-larga">
+        <div className="sidebar-header"><h2>Mentor<span>IA</span></h2></div>
+        <div className="usuario-info">
+          <div className="avatar-grande">{aluno?.nome_aluno?.charAt(0)}</div>
+          <div className="texto-usuario">
+            <strong>{aluno?.nome_aluno}</strong>
+            <span>Estudante</span>
           </div>
         </div>
-        <nav className="sidebar-nav">
-          <button className="nav-item ativo">🏠 Minhas Turmas</button>
+        <nav className="menu-lateral">
+          <button className="item-menu ativo">🏠 Início</button>
+          <button className="item-menu">📝 Minhas Redações</button>
         </nav>
+        <button className="btn-nova-turma" onClick={() => setModalAberto(true)}>+ Entrar em Turma</button>
       </aside>
 
-      <main className="main-content">
-        <header className="main-header">
-          <h1>Área do Estudante</h1>
-          <button className="botao-participar-topo" onClick={() => setModalAberto(true)}>
-            + Entrar em Turma
-          </button>
-        </header>
+      <main className="conteudo-principal">
+        <header className="topo-dashboard"><h1>Minhas Salas</h1></header>
 
         <div className="grid-turmas">
-          {turmas.length === 0 ? (
-            <p className="msg-vazia">Nenhuma turma vinculada ao seu perfil.</p>
-          ) : (
-            turmas.map((t) => (
-              <div key={t.id} className="card-turma-aluno">
-                <div className="card-topo" style={{ backgroundColor: '#8b5cf6' }}>
-                  <h3>{t.nome_turma}</h3>
-                  <p>{t.serie}</p>
-                </div>
-                <div className="card-corpo">
-                  <p>✅ Conectado à tb_turmas</p>
-                </div>
+          {turmas.map(t => (
+            <div key={t.id} className="card-sala-aluno">
+              <div className="card-sala-topo-aluno">
+                <h3>{t.nome_turma}</h3>
+                <p>{t.serie}</p>
               </div>
-            ))
-          )}
+              <div className="card-sala-footer-aluno">
+                <span>Atividades: {t.redacoes_total || 0}</span>
+                <button className="btn-lixeira-aluno" onClick={() => sairDaTurma(t.id)}>🗑️</button>
+              </div>
+            </div>
+          ))}
         </div>
       </main>
 
+      {/* Modal permanece igual à versão do professor para manter padrão */}
       {modalAberto && (
-        <div className="modal-overlay">
-          <div className="modal-container">
-            <h3>Participar (tb_turmas)</h3>
-            <form onSubmit={participarDaTurma}>
-              <div className="campo-input">
-                <label>Código Gerado pelo Professor</label>
-                <input type="text" value={codigoBusca} onChange={e => setCodigoBusca(e.target.value)} required />
+        <div className="modal-fix-overlay">
+          <div className="modal-fix-card">
+            <h2>Entrar na Turma</h2>
+            <form onSubmit={entrarNaTurma}>
+              <div className="input-grupo">
+                <input type="text" value={codigoBusca} onChange={e => setCodigoBusca(e.target.value)} placeholder="Código da sala" required />
               </div>
-              <button type="submit" className="botao-confirmar-modal">Validar Matrícula</button>
+              <div className="modal-botoes">
+                <button type="button" className="btn-cancelar" onClick={() => setModalAberto(false)}>Voltar</button>
+                <button type="submit" className="btn-salvar-aluno">Confirmar</button>
+              </div>
             </form>
           </div>
         </div>

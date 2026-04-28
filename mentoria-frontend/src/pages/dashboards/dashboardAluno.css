@@ -1,284 +1,86 @@
-/* --- LAYOUT BASE --- */
-.dashboard-layout {
+.dashboard-container {
   display: flex;
   min-height: 100vh;
-  background-color: #f8fafd;
+  background: #f4f7fe;
 }
 
-/* --- SIDEBAR --- */
-.sidebar {
-  width: 260px;
-  background-color: white;
-  border-right: 1px solid #eef0f3;
+/* Sidebar Fixa para não imprensar */
+.sidebar-larga {
+  width: 280px;
+  min-width: 280px; /* Garante que não vai encolher */
+  background: white;
   padding: 30px 20px;
-  display: flex;
-  flex-direction: column;
   position: fixed;
   height: 100vh;
-  z-index: 100;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
 }
 
-.sidebar-logo h2 {
-  color: #1a73e8;
-  margin-bottom: 40px;
-  font-size: 24px;
-}
-.sidebar-logo span { color: #333; }
-
-.sidebar-perfil {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 30px;
-  padding: 12px;
-  background-color: #f8fafd;
-  border-radius: 12px;
+.conteudo-principal {
+  margin-left: 280px; /* Tamanho da sua sidebar */
+  padding: 40px;
+  /* Calcula a largura real disponível para os cards */
+  width: calc(100% - 280px); 
+  box-sizing: border-box;
+  min-height: 100vh;
 }
 
-.avatar-circulo {
-  width: 45px;
-  height: 45px;
-  background-color: #1a73e8;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-.sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
-}
-
-.nav-item {
-  border: none;
-  background: none;
-  padding: 12px;
-  text-align: left;
-  border-radius: 8px;
-  cursor: pointer;
-  color: #555;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.nav-item.ativo {
-  background-color: #e8f0fe;
-  color: #1a73e8;
-  font-weight: bold;
-}
-
-.botao-nova-turma-sidebar {
-  background-color: #1a73e8;
-  color: white;
-  border: none;
-  padding: 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* --- CONTEÚDO --- */
-.main-content {
-  flex: 1;
-  margin-left: 260px; /* Dá espaço para a sidebar fixa */
-  padding: 40px 60px;
-}
-
-.main-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 40px;
-}
-
-.perfil-mini {
-  width: 40px;
-  height: 40px;
-  background-color: #1a73e8;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-/* --- CARDS DE ESTATÍSTICAS --- */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: 40px;
-}
-
-.stat-card {
-  background: white;
-  padding: 25px;
-  border-radius: 16px;
-  border: 1px solid #eef0f3;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-}
-
-.stat-card h2 {
-  font-size: 32px;
-  margin-top: 10px;
-}
-
-/* --- GRID DE TURMAS --- */
 .grid-turmas {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* Força a criação de colunas de no mínimo 280px. 
+     Se não couber duas, ele empilha, mas aqui garantimos que elas tentem ficar lado a lado */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
   gap: 25px;
-  margin-top: 20px;
+  width: 100%;
+  /* Garante que o grid se comporte como um bloco de fluxo normal */
+  position: relative;
+  align-items: start;
 }
-
-.card-turma {
+.card-sala-aluno {
   background: white;
-  border-radius: 16px;
+  border-radius: 15px;
   overflow: hidden;
-  border: 1px solid #eef0f3;
-}
-
-.card-topo {
-  padding: 20px;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-}
-
-.card-corpo {
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.codigo-box {
-  background: #f8fafd;
-  border: 1px dashed #ccc;
-  padding: 10px 20px;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.card-footer {
-  padding: 15px 20px;
-  border-top: 1px solid #eee;
-  display: flex;
-  justify-content: space-around;
-  font-size: 13px;
-  color: #666;
-}
-
-/* --- MODAL --- */
-.modal-overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-container {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  width: 400px;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.formulario-modal-turma {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  /* Isso garante que o card ocupe o espaço dele no grid e não flutue */
+  position: relative; 
+  height: auto;
+  min-height: 150px;
 }
 
-.campo-input input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-top: 5px;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.botao-confirmar-modal {
-  background: #1a73e8;
+.card-sala-topo-aluno {
+  padding: 20px;
+  background: #8b5cf6;
   color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
 }
 
-/* Importa as bases do professor se necessário ou apenas adicione abaixo */
-
-.botao-participar-topo {
-  background-color: #1a73e8;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.botao-participar-topo:hover {
-  background-color: #1557b0;
-}
-
-.card-turma-aluno {
-  background: white;
-  border-radius: 16px;
-  border: 1px solid #eef0f3;
-  position: relative;
-  overflow: visible; /* Importante para o avatar sair do card */
-}
-
-.avatar-prof-card {
-  position: absolute;
-  right: 20px;
-  bottom: -20px;
-  width: 45px;
-  height: 45px;
-  background: white;
-  border: 3px solid #f8fafd;
-  border-radius: 50%;
+.card-sala-footer-aluno {
+  padding: 15px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+}
+
+.btn-lixeira-aluno {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.6;
+}
+
+.btn-lixeira-aluno:hover {
+  opacity: 1;
+  color: #d93025;
+}
+
+/* Estilo do Botão Roxo do Aluno */
+.btn-salvar-aluno {
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
   font-weight: bold;
-  color: #1a73e8;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.stats-card-aluno {
-  display: flex;
-  gap: 20px;
-  color: #888;
-  font-size: 13px;
-}
-
-.nome-professor {
-  font-weight: 500;
-  color: #444;
+  cursor: pointer;
 }
