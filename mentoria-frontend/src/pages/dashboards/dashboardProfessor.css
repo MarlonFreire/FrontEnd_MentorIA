@@ -1,0 +1,255 @@
+/* Layout Geral */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f7fe;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sidebar Larga e Moderna */
+.sidebar-larga {
+  width: 280px;
+  background-color: #ffffff;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-header h2 {
+  color: #1a73e8;
+  font-size: 26px;
+  margin-bottom: 40px;
+}
+
+.usuario-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: #f8faff;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.avatar-grande {
+  width: 50px;
+  height: 50px;
+  background: #1a73e8;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.texto-usuario strong {
+  display: block;
+  font-size: 14px;
+  color: #333;
+}
+
+.texto-usuario span {
+  font-size: 12px;
+  color: #777;
+}
+
+.menu-lateral {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.item-menu {
+  background: none;
+  border: none;
+  padding: 12px 15px;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #5f6368;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.item-menu.ativo {
+  background: #e8f0fe;
+  color: #1a73e8;
+}
+
+.btn-nova-turma {
+  background: #1a73e8;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* Conteúdo Principal */
+.conteudo-principal {
+  margin-left: 280px;
+  padding: 40px;
+  width: 100%;
+}
+
+.topo-dashboard h1 {
+  font-size: 28px;
+  color: #202124;
+  margin-bottom: 30px;
+}
+
+/* Cards de Resumo (O topo que você queria) */
+.cards-resumo {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.card-mini {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  flex: 1;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-mini span { color: #5f6368; font-size: 14px; }
+.card-mini strong { font-size: 24px; color: #1a73e8; margin-top: 5px; }
+
+.card-mini.alerta strong { color: #d93025; }
+.card-mini.sucesso strong { color: #188038; }
+
+/* Grid de Turmas */
+.grid-turmas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.card-sala {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.card-sala-topo {
+  padding: 20px;
+  color: white;
+  background: #1a73e8;
+}
+
+.card-sala-footer {
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-badge { font-size: 12px; color: #5f6368; }
+
+/* MODAL REFEITO (O mais importante!) */
+.modal-fix-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(32, 33, 36, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-fix-card {
+  background: white;
+  padding: 32px;
+  border-radius: 20px;
+  width: 450px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.modal-fix-card h2 { margin-bottom: 20px; color: #202124; }
+
+.input-grupo {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-grupo label { font-size: 14px; font-weight: 600; color: #5f6368; }
+
+.input-grupo input {
+  padding: 12px;
+  border: 1.5px solid #dadce0;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.modal-botoes {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.btn-cancelar {
+  background: #f1f3f4;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-salvar {
+  background: #1a73e8;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.card-sala-footer {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between; /* Código de um lado, lixeira do outro */
+  align-items: center;
+  background: #fff;
+}
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.btn-excluir-turma {
+  background: #fff5f5;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  color: #d93025;
+}
+
+.btn-excluir-turma:hover {
+  background: #fee2e2;
+  transform: scale(1.1);
+}
+
+.btn-excluir-turma:active {
+  transform: scale(0.9);
+}

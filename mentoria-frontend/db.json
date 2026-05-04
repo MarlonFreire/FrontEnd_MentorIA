@@ -1,0 +1,112 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "email": "prof@email.com",
+      "senha": "123",
+      "tipo_usuario": "professor"
+    },
+    {
+      "id": "2",
+      "email": "aluno@email.com",
+      "senha": "123",
+      "tipo_usuario": "aluno"
+    },
+    {
+      "email": "maria@gmail.com",
+      "senha": "123456",
+      "tipo_usuario": "professor",
+      "id": "OwYAufrp77A"
+    },
+    {
+      "email": "ana@gmail.com",
+      "senha": "123456",
+      "tipo_usuario": "aluno",
+      "id": "sVPWbyQGLHs"
+    }
+  ],
+  "tb_professores": [
+    {
+      "id": "1",
+      "id_usuario": "1",
+      "nome_professor": "Sarah Jenkins",
+      "disciplina": "Redação"
+    },
+    {
+      "nome_professor": "MARIA ALICE",
+      "disciplina": "Geral",
+      "id_usuario": "OwYAufrp77A",
+      "id": "-TtydJtXSHU"
+    }
+  ],
+  "tb_alunos": [
+    {
+      "id": "1",
+      "id_usuario": "2",
+      "nome_aluno": "Alice Oliveira",
+      "matricula": "2024001"
+    },
+    {
+      "nome_aluno": "ana oliveira",
+      "matricula": "MAT-826",
+      "id_usuario": "sVPWbyQGLHs",
+      "id": "3Bzimmvbb_c"
+    }
+  ],
+  "tb_turmas": [
+    {
+      "nome_turma": "2 anod",
+      "serie": "medio",
+      "codigo_turma": "X1WXSV11",
+      "id_professor": "-TtydJtXSHU",
+      "alunos_cont": 1,
+      "redacoes_total": 0,
+      "redacoes_pendentes": 0,
+      "id": "rRsyyt6k0G8"
+    },
+    {
+      "nome_turma": "3 ano b",
+      "serie": "medio",
+      "codigo_turma": "YKNVA392",
+      "id_professor": "-TtydJtXSHU",
+      "alunos_cont": 1,
+      "redacoes_total": 0,
+      "redacoes_pendentes": 0,
+      "id": "S9O64qLtSZw"
+    },
+    {
+      "nome_turma": "2 c",
+      "serie": "medio",
+      "codigo_turma": "5XTHB7IE",
+      "id_professor": "-TtydJtXSHU",
+      "alunos_cont": 1,
+      "redacoes_total": 0,
+      "redacoes_pendentes": 0,
+      "id": "pnsQW36HUxU"
+    },
+    {
+      "nome_turma": "Letras",
+      "serie": "Superior",
+      "codigo_turma": "U56A6ZS4",
+      "id_professor": "-TtydJtXSHU",
+      "alunos_cont": 1,
+      "redacoes_total": 0,
+      "redacoes_pendentes": 0,
+      "id": "1MkBJx5kpdk"
+    },
+    {
+      "nome_turma": "letras",
+      "serie": "superior",
+      "codigo_turma": "BZUV1DMS",
+      "id_professor": "-TtydJtXSHU",
+      "alunos_cont": 1,
+      "redacoes_total": 0,
+      "redacoes_pendentes": 0,
+      "id": "NauOdTaFunc"
+    }
+  ],
+  "tb_aluno_turma": [],
+  "tb_redacoes": [],
+  "tb_correcao": [],
+  "$schema": "./node_modules/json-server/schema.json"
+}

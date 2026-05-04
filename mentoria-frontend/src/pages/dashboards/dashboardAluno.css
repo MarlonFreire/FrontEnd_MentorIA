@@ -1,0 +1,86 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f7fe;
+}
+
+/* Sidebar Fixa para não imprensar */
+.sidebar-larga {
+  width: 280px;
+  min-width: 280px; /* Garante que não vai encolher */
+  background: white;
+  padding: 30px 20px;
+  position: fixed;
+  height: 100vh;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.conteudo-principal {
+  margin-left: 280px; /* Tamanho da sua sidebar */
+  padding: 40px;
+  /* Calcula a largura real disponível para os cards */
+  width: calc(100% - 280px); 
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+.grid-turmas {
+  display: grid;
+  /* Força a criação de colunas de no mínimo 280px. 
+     Se não couber duas, ele empilha, mas aqui garantimos que elas tentem ficar lado a lado */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+  gap: 25px;
+  width: 100%;
+  /* Garante que o grid se comporte como um bloco de fluxo normal */
+  position: relative;
+  align-items: start;
+}
+.card-sala-aluno {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  /* Isso garante que o card ocupe o espaço dele no grid e não flutue */
+  position: relative; 
+  height: auto;
+  min-height: 150px;
+}
+
+.card-sala-topo-aluno {
+  padding: 20px;
+  background: #8b5cf6;
+  color: white;
+}
+
+.card-sala-footer-aluno {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-lixeira-aluno {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.6;
+}
+
+.btn-lixeira-aluno:hover {
+  opacity: 1;
+  color: #d93025;
+}
+
+/* Estilo do Botão Roxo do Aluno */
+.btn-salvar-aluno {
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
