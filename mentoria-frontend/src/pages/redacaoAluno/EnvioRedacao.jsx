@@ -31,7 +31,6 @@ const EnvioRedacao = () => {
           <ul>
             <li><a href="#dashboard">Dashboard</a></li>
             <li><a href="#essays" className="active">Minhas redações</a></li>
-            <li><a href="#settings">configuração</a></li>
           </ul>
         </nav>
         <div className="mentor-profile">
@@ -94,17 +93,6 @@ const EnvioRedacao = () => {
               <li><i className="fas fa-check-circle"></i> Revise por erros ortográficos e gramaticais antes de enviar.</li>
               <li><i className="fas fa-check-circle"></i> Inclua uma declaração de tese clara e concisa em sua introdução.</li>
             </ul>
-          </div>
-
-          <div className="card-sidebar ai-card">
-            <h3 className="ai-title"><i className="far fa-lightbulb"></i> Dicas rápidas da IA</h3>
-            <p>ONossa IA sugere que você se concentre em palavras de transição fortes entre os parágrafos para melhorar a fluidez de seus argumentos.</p>
-            <div className="ai-quote">
-              "Tente usar palavras como 'Além disso', 'no entanto' ou 'consequentemente' para conectar ideias complexas."
-            </div>
-            <button className="ai-action-btn">
-              <i className="fas fa-wand-magic-sparkles"></i> Execute a pré-verificação de IA
-            </button>
           </div>
         </aside>
       </main>
