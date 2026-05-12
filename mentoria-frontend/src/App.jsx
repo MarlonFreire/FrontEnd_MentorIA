@@ -5,6 +5,7 @@ import Login from './pages/autenticacao/login';
 import Cadastro from './pages/autenticacao/cadastro';
 import LandingPage from './pages/landingPage/LandingPage';
 import Redacao from "./pages/redacaoAluno/EnvioRedacao";
+//import VerRedacao from "./pages/redacaoAluno/VerRedacao";
 
 function App() {
   return (
@@ -15,8 +16,7 @@ function App() {
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/dashboard-professor" element={<DashboardProfessor />} />
           <Route path="/dashboard-aluno" element={<DashboardAluno />} />
-          <Route path="/enviar-redacao" element={<RedacaoAluno />} />
-         
+          <Route path="/enviar-redacao" element={<Redacao />} />         
       </Routes>
     </Router>
   
