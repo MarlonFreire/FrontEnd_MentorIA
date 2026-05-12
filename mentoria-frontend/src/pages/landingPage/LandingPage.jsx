@@ -30,9 +30,11 @@ export default function LandingPage() {
           <a href="#depoimentos">Depoimentos</a>
           <a href="#contato">Contato</a>
         </nav>
-        <Link to="/cadastro" className="btn-primary small">Começar agora</Link>
-        <Link to="/login" className="btn-primary small">Acessar plataforma</Link>
-              </header>
+        <div className="nav-actions">
+          <Link to="/cadastro" className="btn-primary small">Começar agora</Link>
+          <Link to="/login" className="btn-primary small">Acessar plataforma</Link>
+        </div>
+      </header>
 
       {/* HERO SECTION */}
       <section className="hero">
