@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import './VerRedação.css';
+import './VerRedacao.css';
 
-const VerRedação = () => {
+const VerRedacao = () => {
   const [activeTab, setActiveTab] = useState('ai');
 
   return (
     <div className="ver-container">
 
-      {/* HEADER (reaproveitável no projeto) */}
+      {/* HEADER */}
       <header className="mentor-header">
         <div className="mentor-logo">MentorIA</div>
 
@@ -15,12 +15,14 @@ const VerRedação = () => {
           <ul>
             <li><a href="#dashboard">Dashboard</a></li>
             <li><a href="#essays" className="active">Redações</a></li>
-            <li><a href="#settings">Configuração</a></li>
           </ul>
         </nav>
 
         <div className="mentor-profile">
-          <img src="https://ui-avatars.com/api/?name=User&background=random" alt="User" />
+          <img 
+            src="https://ui-avatars.com/api/?name=User&background=random" 
+            alt="User" 
+          />
         </div>
       </header>
 
@@ -60,13 +62,6 @@ const VerRedação = () => {
               className={activeTab === 'ai' ? 'active' : ''}
               onClick={() => setActiveTab('ai')}
             >
-              AI Analysis
-            </span>
-
-            <span 
-              className={activeTab === 'teacher' ? 'active' : ''}
-              onClick={() => setActiveTab('teacher')}
-            >
               Teacher Comments
             </span>
           </div>
@@ -95,4 +90,4 @@ const VerRedação = () => {
   );
 };
 
-export default VerRedação;
+export default VerRedacao;
