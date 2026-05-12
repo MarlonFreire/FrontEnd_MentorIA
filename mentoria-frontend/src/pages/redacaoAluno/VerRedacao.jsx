@@ -31,26 +31,25 @@ const VerRedacao = () => {
 
         {/* TEXTO */}
         <section className="ver-content">
-          <h1>History Midterm: The Causes of the French Revolution</h1>
-          <p className="sub">Submitted on Oct 12, 2023</p>
+          <h1>Desafios enfrentados por pessoas com doenças raras no Brasil</h1>
+          <p className="sub">Enviada em Out 12, 2023</p>
 
           <p className="text">
-            The French Revolution,
-            <span className="highlight-red"> which beginning in 1789 </span>,
-            was a period of radical social and political upheaval in France.
+            A Constituição Federal de 1988,
+            <span className="highlight-red"> assegura o direito à saúde como um dever do Estado </span>,
+            No entanto, essa garantia ainda encontra obstáculos significativos quando se trata de pessoas com doenças raras no Brasil.
           </p>
 
           <div className="highlight-blue">
-            The country was deeply in debt, largely due to their involvement in the American Revolution and the extravagant spending of King Louis XVI.
-          </div>
+            Essas condições, que afetam uma pequena parcela da população individualmente, somam milhões de brasileiros quando consideradas em conjunto, revelando um cenário marcado por dificuldades no diagnóstico, acesso ao tratamento e inclusão social.          </div>
 
           <p className="text">
-            Furthermore, the social structure of France divided into three estates.
-            <span className="highlight-orange"> were exempt from most taxes </span>.
+            Um dos principais desafios enfrentados por essas pessoas é a demora no diagnóstico.
+            <span className="highlight-orange"> evido à baixa incidência e à limitada formação de profissionais de saúde sobre o tema, </span>.
           </p>
 
           <p className="text">
-            In conclusion, the French Revolution was not caused by a single event.
+            muitos pacientes passam anos em busca de respostas, enfrentando uma verdadeira “via-crúcis” médica.
           </p>
         </section>
 
@@ -62,26 +61,26 @@ const VerRedacao = () => {
               className={activeTab === 'ai' ? 'active' : ''}
               onClick={() => setActiveTab('ai')}
             >
-              Teacher Comments
+              comentários do professor
             </span>
           </div>
 
           <div className={`card red ${activeTab !== 'ai' ? 'disabled' : ''}`}>
-            <h3>Grammar & Syntax</h3>
-            <small>2 issues</small>
-            <p>"which beginning in 1789" → incorrect verb tense</p>
+            <h3>Gramatica e sintaxe</h3>
+            <small>2 erros</small>
+            <p>"assegura o direito à saúde como um dever do Estado " → verbo incorreto</p>
           </div>
 
           <div className={`card blue ${activeTab !== 'ai' ? 'disabled' : ''}`}>
-            <h3>Structure & Flow</h3>
-            <small>1 note</small>
-            <p>Strong paragraph transition could improve clarity.</p>
+            <h3>estrutura & coerencia</h3>
+            <small>1 anotação</small>
+            <p>Uma transição de parágrafos bem estruturada poderia melhorar a clareza..</p>
           </div>
 
           <div className={`card yellow ${activeTab !== 'ai' ? 'disabled' : ''}`}>
-            <h3>Citations & Facts</h3>
-            <small>1 missing</small>
-            <p>Add a reference for tax exemption claim.</p>
+            <h3>Citação e fatos</h3>
+            <small>1 melhoria</small>
+            <p>Adicione uma referência</p>
           </div>
 
         </aside>
