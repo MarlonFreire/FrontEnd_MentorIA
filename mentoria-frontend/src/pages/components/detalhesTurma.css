@@ -1,0 +1,138 @@
+.detalhes-container {
+  min-height: 100vh;
+  background-color: #f8faff;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Header Superior */
+.header-turma {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.header-turma .logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #1a73e8;
+}
+
+.perfil-topo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Banner Azul Principal */
+.banner-turma {
+  background: #2563eb; /* Azul vibrante do print */
+  margin: 30px 50px;
+  padding: 60px;
+  border-radius: 30px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+}
+
+.banner-info h1 {
+  font-size: 48px;
+  margin: 0;
+  font-weight: 800;
+}
+
+.banner-info p {
+  font-size: 20px;
+  opacity: 0.9;
+  margin-top: 10px;
+}
+
+/* Card de Código (Destaque do Professor) */
+.codigo-destaque {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 20px 30px;
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.codigo-destaque span {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.codigo-destaque strong {
+  font-size: 28px;
+  font-family: 'monospace';
+}
+
+/* Área de Conteúdo Abaixo */
+.conteudo-turma {
+  margin: 0 50px;
+}
+
+.tabs-acoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.tabs-acoes h2 {
+  font-size: 24px;
+  color: #1e293b;
+}
+
+/* Botão Enviar Redação */
+.btn-enviar {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-enviar:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* Estado Vazio (Placeholder) */
+.lista-vazia {
+  background: white;
+  border: 2px dashed #e2e8f0;
+  border-radius: 20px;
+  padding: 80px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.lista-vazia p {
+  color: #64748b;
+  font-size: 18px;
+}
+
+/* Botão de Voltar Lateral */
+.btn-voltar-fixo {
+  background: white;
+  border: 1px solid #e2e8f0;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  color: #64748b;
+}

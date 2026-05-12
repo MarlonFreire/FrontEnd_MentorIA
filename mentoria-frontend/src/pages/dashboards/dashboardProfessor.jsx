@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importante para a navegação
 import './dashboardProfessor.css';
 
 function DashboardProfessor() {
@@ -7,6 +8,8 @@ function DashboardProfessor() {
   const [modalAberto, setModalAberto] = useState(false);
   const [nomeTurma, setNomeTurma] = useState('');
   const [serie, setSerie] = useState('');
+  
+  const navigate = useNavigate(); // Inicializa a navegação
 
   const carregarDados = async () => {
     const userLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
@@ -47,14 +50,13 @@ function DashboardProfessor() {
     carregarDados();
   };
 
-  // --- NOVA FUNÇÃO: EXCLUIR TURMA ---
-  const excluirTurma = async (id) => {
+  const excluirTurma = async (e, id) => {
+    e.stopPropagation(); // Impede que o clique na lixeira abra a sala por acidente
     if (window.confirm("Atenção: Ao excluir esta turma, todos os dados vinculados a ela serão perdidos. Deseja continuar?")) {
       try {
         await fetch(`http://localhost:5000/tb_turmas/${id}`, {
           method: 'DELETE'
         });
-        // Atualiza a lista local removendo a turma deletada
         setTurmas(turmas.filter(t => t.id !== id));
       } catch (error) {
         alert("Erro ao excluir a turma.");
@@ -70,7 +72,7 @@ function DashboardProfessor() {
         </div>
         
         <div className="usuario-info">
-          <div className="avatar-grande">{professor?.nome_professor.charAt(0)}</div>
+          <div className="avatar-grande">{professor?.nome_professor?.charAt(0)}</div>
           <div className="texto-usuario">
             <strong>{professor?.nome_professor}</strong>
             <span>Professor(a)</span>
@@ -109,7 +111,12 @@ function DashboardProfessor() {
 
         <div className="grid-turmas">
           {turmas.map((t) => (
-            <div key={t.id} className="card-sala">
+            <div 
+              key={t.id} 
+              className="card-sala" 
+              onClick={() => navigate(`/turma-professor/${t.id}`)}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="card-sala-topo">
                 <h3>{t.nome_turma}</h3>
                 <p>{t.serie}</p>
@@ -119,10 +126,9 @@ function DashboardProfessor() {
                   <div className="info-badge">Código: <strong>{t.codigo_turma}</strong></div>
                   <div className="info-badge">Alunos: <strong>{t.alunos_cont}</strong></div>
                 </div>
-                {/* BOTÃO DE LIXEIRA NO FOOTER */}
                 <button 
                   className="btn-excluir-turma" 
-                  onClick={() => excluirTurma(t.id)}
+                  onClick={(e) => excluirTurma(e, t.id)}
                   title="Excluir turma"
                 >
                   🗑️

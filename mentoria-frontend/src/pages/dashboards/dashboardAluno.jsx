@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importante para a navegação
 import './dashboardAluno.css';
 
 function DashboardAluno() {
@@ -6,43 +7,40 @@ function DashboardAluno() {
   const [aluno, setAluno] = useState(null);
   const [modalAberto, setModalAberto] = useState(false);
   const [codigoBusca, setCodigoBusca] = useState('');
-
   
- const carregarDados = async () => {
-  const userLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-  if (userLogado) {
-    const respA = await fetch(`http://localhost:5000/tb_alunos?id_usuario=${userLogado.id}`);
-    const dadosA = await respA.json();
-    
-    if (dadosA.length > 0) {
-      const alunoAtual = dadosA[0];
-      setAluno(alunoAtual);
+  const navigate = useNavigate(); // Inicializa a navegação
+
+  const carregarDados = async () => {
+    const userLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+    if (userLogado) {
+      const respA = await fetch(`http://localhost:5000/tb_alunos?id_usuario=${userLogado.id}`);
+      const dadosA = await respA.json();
       
-      const storageKey = `vinculos_aluno_${alunoAtual.id}`;
-      const idsQueEuEntrei = JSON.parse(localStorage.getItem(storageKey)) || [];
-      
-      if (idsQueEuEntrei.length > 0) {
-        // BUSCA TODAS AS TURMAS DO BANCO
-        const respT = await fetch(`http://localhost:5000/tb_turmas`);
-        const todasAsTurmasDoBanco = await respT.json();
+      if (dadosA.length > 0) {
+        const alunoAtual = dadosA[0];
+        setAluno(alunoAtual);
         
-        // FILTRA: Só deixa as turmas que o ID está na minha lista do localStorage
-        const minhasTurmasFiltradas = todasAsTurmasDoBanco.filter(turma => 
-          idsQueEuEntrei.includes(turma.id)
-        );
+        const storageKey = `vinculos_aluno_${alunoAtual.id}`;
+        const idsQueEuEntrei = JSON.parse(localStorage.getItem(storageKey)) || [];
         
-        console.log("Turmas que o aluno entrou:", minhasTurmasFiltradas);
-        setTurmas(minhasTurmasFiltradas); 
-      } else {
-        setTurmas([]);
+        if (idsQueEuEntrei.length > 0) {
+          const respT = await fetch(`http://localhost:5000/tb_turmas`);
+          const todasAsTurmasDoBanco = await respT.json();
+          
+          const minhasTurmasFiltradas = todasAsTurmasDoBanco.filter(turma => 
+            idsQueEuEntrei.includes(turma.id)
+          );
+          
+          setTurmas(minhasTurmasFiltradas); 
+        } else {
+          setTurmas([]);
+        }
       }
     }
-  }
-};
+  };
 
   useEffect(() => { carregarDados(); }, []);
 
-  
   const entrarNaTurma = async (e) => {
     e.preventDefault();
     try {
@@ -58,7 +56,6 @@ function DashboardAluno() {
           const novosIds = [...idsAtuais, turmaEncontrada.id];
           localStorage.setItem(storageKey, JSON.stringify(novosIds));
 
-          
           await fetch(`http://localhost:5000/tb_turmas/${turmaEncontrada.id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -80,8 +77,8 @@ function DashboardAluno() {
     }
   };
 
-  // 3. SAIR DA TURMA
-  const sairDaTurma = async (idTurma) => {
+  const sairDaTurma = async (e, idTurma) => {
+    e.stopPropagation(); // Impede que abra a turma ao clicar para sair
     if (window.confirm("Deseja sair desta turma?")) {
       const storageKey = `vinculos_aluno_${aluno.id}`;
       const idsAtuais = JSON.parse(localStorage.getItem(storageKey)) || [];
@@ -89,7 +86,6 @@ function DashboardAluno() {
       
       localStorage.setItem(storageKey, JSON.stringify(novosIds));
       
-      // Opcional: Avisar o banco que um aluno saiu
       const turmaAlvo = turmas.find(t => t.id === idTurma);
       await fetch(`http://localhost:5000/tb_turmas/${idTurma}`, {
         method: 'PATCH',
@@ -124,21 +120,30 @@ function DashboardAluno() {
 
         <div className="grid-turmas">
           {turmas.map(t => (
-            <div key={t.id} className="card-sala-aluno">
+            <div 
+              key={t.id} 
+              className="card-sala-aluno" 
+              onClick={() => navigate(`/turma-aluno/${t.id}`)}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="card-sala-topo-aluno">
                 <h3>{t.nome_turma}</h3>
                 <p>{t.serie}</p>
               </div>
               <div className="card-sala-footer-aluno">
                 <span>Atividades: {t.redacoes_total || 0}</span>
-                <button className="btn-lixeira-aluno" onClick={() => sairDaTurma(t.id)}>🗑️</button>
+                <button 
+                  className="btn-lixeira-aluno" 
+                  onClick={(e) => sairDaTurma(e, t.id)}
+                >
+                  🗑️
+                </button>
               </div>
             </div>
           ))}
         </div>
       </main>
 
-      {/* Modal permanece igual à versão do professor para manter padrão */}
       {modalAberto && (
         <div className="modal-fix-overlay">
           <div className="modal-fix-card">
