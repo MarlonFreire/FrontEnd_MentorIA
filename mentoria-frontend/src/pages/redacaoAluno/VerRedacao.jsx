@@ -1,86 +1,87 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import './VerRedacao.css';
 
 const VerRedacao = () => {
-  const [activeTab, setActiveTab] = useState('ai');
+  const { idRedacao } = useParams(); 
+  const navigate = useNavigate();
+  
+  const [redacao, setRedacao] = useState(null);
+  const [correcao, setCorrecao] = useState(null);
+  const [carregando, setCarregando] = useState(true);
+
+  useEffect(() => {
+    // Busca a redação que o aluno enviou
+    fetch(`http://localhost:5000/tb_redacoes/${idRedacao}`)
+      .then(res => res.json())
+      .then(dadosRedacao => {
+        setRedacao(dadosRedacao);
+        
+        // Busca a correção feita pelo professor para esta redação
+        return fetch(`http://localhost:5000/tb_correcao?id_redacao=${idRedacao}`);
+      })
+      .then(res => res.json())
+      .then(dadosCorrecao => {
+        if (dadosCorrecao.length > 0) {
+          setCorrecao(dadosCorrecao[0]);
+        }
+        setCarregando(false);
+      })
+      .catch(err => {
+        console.error("Erro ao carregar dados da correção:", err);
+        setCarregando(false);
+      });
+  }, [idRedacao]);
+
+  if (carregando) return <div className="carregando-aviso">Carregando sua correção...</div>;
+  if (!redacao) return <div className="erro-aviso">Redação não encontrada.</div>;
 
   return (
-    <div className="ver-container">
-
-      {/* HEADER */}
+    <div className="visualizar-redacao-tela">
+      {/* Topo da Página */}
       <header className="mentor-header">
-        <div className="mentor-logo">MentorIA</div>
-
-        <nav className="mentor-nav">
-          <ul>
-            <li><a href="#dashboard">Dashboard</a></li>
-            <li><a href="#essays" className="active">Redações</a></li>
-          </ul>
-        </nav>
-
-        <div className="mentor-profile">
-          <img 
-            src="https://ui-avatars.com/api/?name=User&background=random" 
-            alt="User" 
-          />
-        </div>
+        <div className="mentor-logo">Mentor<span>IA</span></div>
+        <button className="btn-voltar-turma" onClick={() => navigate(-1)}>
+          ← Voltar para a Turma
+        </button>
       </header>
 
-      {/* MAIN */}
-      <main className="ver-main">
-
-        {/* TEXTO */}
-        <section className="ver-content">
-          <h1>Desafios enfrentados por pessoas com doenças raras no Brasil</h1>
-          <p className="sub">Enviada em Out 12, 2023</p>
-
-          <p className="text">
-            A Constituição Federal de 1988,
-            <span className="highlight-red"> assegura o direito à saúde como um dever do Estado </span>,
-            No entanto, essa garantia ainda encontra obstáculos significativos quando se trata de pessoas com doenças raras no Brasil.
-          </p>
-
-          <div className="highlight-blue">
-            Essas condições, que afetam uma pequena parcela da população individualmente, somam milhões de brasileiros quando consideradas em conjunto, revelando um cenário marcado por dificuldades no diagnóstico, acesso ao tratamento e inclusão social.          </div>
-
-          <p className="text">
-            Um dos principais desafios enfrentados por essas pessoas é a demora no diagnóstico.
-            <span className="highlight-orange"> evido à baixa incidência e à limitada formação de profissionais de saúde sobre o tema, </span>.
-          </p>
-
-          <p className="text">
-            muitos pacientes passam anos em busca de respostas, enfrentando uma verdadeira “via-crúcis” médica.
-          </p>
+      {/* Área Principal */}
+      <main className="painel-conteudo">
+        
+        {/* Lado Esquerdo: Texto da Redação */}
+        <section className="secao-texto-aluno">
+          <h1 className="tema-titulo">{redacao.tema}</h1>
+          <p className="data-envio">Enviado em: {redacao.data_entrega}</p>
+          
+          <div className="caixa-texto-real">
+            {redacao.texto}
+          </div>
         </section>
 
-        {/* SIDEBAR */}
-        <aside className="ver-sidebar">
-
-          <div className="tabs">
-            <span 
-              className={activeTab === 'ai' ? 'active' : ''}
-              onClick={() => setActiveTab('ai')}
-            >
-              comentários do professor
+        {/* Lado Direito: Caixa de Notas e Comentários */}
+        <aside className="barra-lateral-feedback">
+          
+          {/* Card com a Nota */}
+          <div className="card-nota-final">
+            <h3>Sua Nota Final</h3>
+            <span className="numero-nota">
+              {correcao ? correcao.nota : "---"}
             </span>
+            <p className="subtexto-nota">Escala de 0 a 1000 pontos</p>
           </div>
 
-          <div className={`card red ${activeTab !== 'ai' ? 'disabled' : ''}`}>
-            <h3>Gramatica e sintaxe</h3>
-            <small>2 erros</small>
-            <p>"assegura o direito à saúde como um dever do Estado " → verbo incorreto</p>
-          </div>
-
-          <div className={`card blue ${activeTab !== 'ai' ? 'disabled' : ''}`}>
-            <h3>estrutura & coerencia</h3>
-            <small>1 anotação</small>
-            <p>Uma transição de parágrafos bem estruturada poderia melhorar a clareza..</p>
-          </div>
-
-          <div className={`card yellow ${activeTab !== 'ai' ? 'disabled' : ''}`}>
-            <h3>Citação e fatos</h3>
-            <small>1 melhoria</small>
-            <p>Adicione uma referência</p>
+          {/* Card com o Feedback de Texto */}
+          <div className="card-comentario-professor">
+            <h3>💬 Comentários do Professor</h3>
+            
+            {correcao ? (
+              <div className="balao-comentario">
+                {correcao.comentario}
+              </div>
+            ) : (
+              <p className="sem-correcao">O professor ainda não digitou um feedback para esta entrega.</p>
+            )}
           </div>
 
         </aside>

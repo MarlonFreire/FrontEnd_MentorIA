@@ -1,116 +1,162 @@
-.ver-container {
-  background: #f5f7fb;
+.visualizar-redacao-tela {
+  width: 100%;
   min-height: 100vh;
-  font-family: Inter, Arial;
+  background-color: #f4f7fe;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
-/* HEADER */
+/* Header */
 .mentor-header {
   display: flex;
   justify-content: space-between;
-  padding: 15px 30px;
-  background: #fff;
-  border-bottom: 1px solid #eee;
+  align-items: center;
+  padding: 15px 40px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-.mentor-nav ul {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-}
-
-.mentor-nav a {
-  text-decoration: none;
-  color: #777;
-}
-
-.mentor-nav .active {
-  color: #4d79ff;
-  font-weight: bold;
-}
-
-/* MAIN */
-.ver-main {
-  display: flex;
-}
-
-/* LEFT */
-.ver-content {
-  width: 70%;
-  padding: 40px;
-  background: #fff;
-}
-
-.ver-content h1 {
+.mentor-logo {
   font-size: 22px;
+  font-weight: bold;
+  color: #1e293b;
 }
 
-.sub {
-  color: #888;
-  font-size: 13px;
+.mentor-logo span {
+  color: #2563eb;
 }
 
-.text {
-  margin-top: 20px;
-  line-height: 1.6;
+.btn-voltar-turma {
+  background: #e2e8f0;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #475569;
+  font-weight: 500;
+  transition: 0.2s;
 }
 
-/* HIGHLIGHTS */
-.highlight-red {
-  background: #ffe5e5;
-  padding: 3px 6px;
-  border-radius: 5px;
+.btn-voltar-turma:hover {
+  background: #cbd5e1;
 }
 
-.highlight-blue {
-  background: #e6f0ff;
-  padding: 15px;
-  border-radius: 10px;
-  margin: 20px 0;
-}
-
-.highlight-orange {
-  background: #fff3e0;
-  padding: 3px 6px;
-  border-radius: 5px;
-}
-
-/* SIDEBAR */
-.ver-sidebar {
-  width: 30%;
-  background: #f0f2f7;
-  padding: 20px;
-}
-
-.tabs {
+/* Painel de Conteúdo */
+.painel-conteudo {
   display: flex;
-  gap: 20px;
+  flex: 1;
+  padding: 30px;
+  gap: 25px;
+  align-items: stretch;
+}
+
+/* Lado Esquerdo - Redação */
+.secao-texto-aluno {
+  flex: 1;
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+}
+
+.tema-titulo {
+  font-size: 24px;
+  color: #1e293b;
+  margin: 0 0 5px 0;
+}
+
+.data-envio {
+  color: #64748b;
+  font-size: 14px;
   margin-bottom: 20px;
 }
 
-.tabs span {
-  cursor: pointer;
-  color: #777;
+.caixa-texto-real {
+  background: #f8fafc;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  flex: 1;
+  line-height: 1.7;
+  font-size: 16px;
+  color: #334155;
+  white-space: pre-wrap; /* Mantém parágrafos originais do aluno */
 }
 
-.tabs .active {
-  color: #4d79ff;
-  font-weight: bold;
+/* Lado Direito - Feedback */
+.barra-lateral-feedback {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* CARDS */
-.card {
-  background: #fff;
-  padding: 15px;
+.card-nota-final {
+  background: white;
+  padding: 25px;
   border-radius: 12px;
-  margin-bottom: 15px;
-  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  text-align: center;
+  border-top: 5px solid #2563eb;
 }
 
-.card.disabled {
-  opacity: 0.4;
+.card-nota-final h3 {
+  margin: 0 0 10px 0;
+  color: #475569;
+  font-size: 16px;
 }
 
-.red { border-left: 5px solid #ff4d4d; }
-.blue { border-left: 5px solid #4d79ff; }
-.yellow { border-left: 5px solid #ffcc00; }
+.numero-nota {
+  font-size: 52px;
+  font-weight: bold;
+  color: #2563eb;
+}
+
+.subtexto-nota {
+  margin: 5px 0 0 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.card-comentario-professor {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  flex: 1;
+}
+
+.card-comentario-professor h3 {
+  margin: 0 0 15px 0;
+  color: #1e293b;
+  font-size: 18px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 10px;
+}
+
+.balao-comentario {
+  line-height: 1.6;
+  color: #1e293b;
+  font-size: 15px;
+  background: #f0fdf4;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #16a34a;
+}
+
+.sem-correcao {
+  color: #64748b;
+  font-style: italic;
+  font-size: 14px;
+}
+
+/* Avisos Globais */
+.carregando-aviso, .erro-aviso {
+  padding: 50px;
+  text-align: center;
+  font-size: 18px;
+  color: #475569;
+}

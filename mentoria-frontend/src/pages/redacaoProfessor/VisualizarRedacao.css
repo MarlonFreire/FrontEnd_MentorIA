@@ -1,0 +1,123 @@
+.correcao-container {
+  min-height: 100vh;
+  background-color: #f4f7fe;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-correcao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.header-correcao h2 span {
+  color: #2563eb;
+}
+
+.btn-voltar {
+  background: #e2e8f0;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #475569;
+  font-weight: 500;
+}
+
+/* Divisão da tela em 50% / 50% */
+.painel-duplo {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+  gap: 20px;
+}
+
+.bloco-leitura, .bloco-formulario {
+  flex: 1;
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo da Redação do Aluno */
+.info-redacao-topo {
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.info-redacao-topo h1 {
+  font-size: 24px;
+  color: #1e293b;
+  margin: 0 0 5px 0;
+}
+
+.texto-do-aluno {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  flex: 1;
+  overflow-y: auto;
+  line-height: 1.6;
+  font-size: 16px;
+  white-space: pre-wrap; /* Mantém as quebras de parágrafo do aluno */
+}
+
+/* Estilo do Formulário */
+.bloco-formulario h2 {
+  font-size: 20px;
+  color: #1e293b;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.campo-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.campo-grupo label {
+  font-weight: 600;
+  color: #475569;
+  font-size: 14px;
+}
+
+.campo-grupo input, .campo-grupo textarea {
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+}
+
+.campo-grupo input:focus, .campo-grupo textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.btn-finalizar-enviar {
+  background: #2563eb;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-finalizar-enviar:hover {
+  background: #1d4ed8;
+}

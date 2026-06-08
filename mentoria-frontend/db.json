@@ -59,7 +59,7 @@
       "serie": "medio",
       "codigo_turma": "X1WXSV11",
       "id_professor": "-TtydJtXSHU",
-      "alunos_cont": 2,
+      "alunos_cont": 3,
       "redacoes_total": 0,
       "redacoes_pendentes": 0,
       "id": "rRsyyt6k0G8"
@@ -96,7 +96,53 @@
     }
   ],
   "tb_aluno_turma": [],
-  "tb_redacoes": [],
-  "tb_correcao": [],
+  "tb_redacoes": [
+    {
+      "tema": "Tema Geral - Proposto pelo Professor",
+      "texto": "alo teste",
+      "status": "Corrigida",
+      "id_aluno": "3Bzimmvbb_c",
+      "nome_aluno": "ana oliveira",
+      "id_turma": "rRsyyt6k0G8",
+      "data_entrega": "2026-06-08",
+      "id": "sisgZnrn6e0"
+    },
+    {
+      "tema": "Tema Geral - Proposto pelo Professor",
+      "texto": "teste 2",
+      "status": "Corrigida",
+      "id_aluno": "3Bzimmvbb_c",
+      "nome_aluno": "ana oliveira",
+      "id_turma": "rRsyyt6k0G8",
+      "data_entrega": "2026-06-08",
+      "id": "9dU9N_pPCiU"
+    }
+  ],
+  "tb_correcao": [
+    {
+      "id_redacao": null,
+      "id_professor": "-TtydJtXSHU",
+      "nota": 100,
+      "comentario": "legal",
+      "data_correcao": "2026-06-08",
+      "id": "64GoDGlp0Qs"
+    },
+    {
+      "id_redacao": null,
+      "id_professor": "-TtydJtXSHU",
+      "nota": 200,
+      "comentario": "legal",
+      "data_correcao": "2026-06-08",
+      "id": "gY-0kyTPBBU"
+    },
+    {
+      "id_redacao": 9,
+      "id_professor": "-TtydJtXSHU",
+      "nota": 300,
+      "comentario": "massa",
+      "data_correcao": "2026-06-08",
+      "id": "4BamLlW6if8"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
