@@ -23,6 +23,18 @@
       "senha": "123456",
       "tipo_usuario": "aluno",
       "id": "sVPWbyQGLHs"
+    },
+    {
+      "email": "teste1@gmail.com",
+      "senha": "1234",
+      "tipo_usuario": "professor",
+      "id": "OCfidvD9saQ"
+    },
+    {
+      "email": "aluno1@gmail.com",
+      "senha": "1234",
+      "tipo_usuario": "aluno",
+      "id": "ZViHsYMD7OA"
     }
   ],
   "tb_professores": [
@@ -37,6 +49,12 @@
       "disciplina": "Geral",
       "id_usuario": "OwYAufrp77A",
       "id": "-TtydJtXSHU"
+    },
+    {
+      "nome_professor": "teste 1",
+      "disciplina": "Geral",
+      "id_usuario": "OCfidvD9saQ",
+      "id": "8Z8UndZDYMk"
     }
   ],
   "tb_alunos": [
@@ -51,6 +69,12 @@
       "matricula": "MAT-826",
       "id_usuario": "sVPWbyQGLHs",
       "id": "3Bzimmvbb_c"
+    },
+    {
+      "nome_aluno": "aluno1",
+      "matricula": "MAT-558",
+      "id_usuario": "ZViHsYMD7OA",
+      "id": "2hLSSSiAHlU"
     }
   ],
   "tb_turmas": [
@@ -65,34 +89,14 @@
       "id": "rRsyyt6k0G8"
     },
     {
-      "nome_turma": "3 ano b",
-      "serie": "medio",
-      "codigo_turma": "YKNVA392",
-      "id_professor": "-TtydJtXSHU",
+      "nome_turma": "teste 1",
+      "serie": "ensino medio",
+      "codigo_turma": "5EBE5XB0",
+      "id_professor": "8Z8UndZDYMk",
       "alunos_cont": 1,
       "redacoes_total": 0,
       "redacoes_pendentes": 0,
-      "id": "S9O64qLtSZw"
-    },
-    {
-      "nome_turma": "2 c",
-      "serie": "medio",
-      "codigo_turma": "5XTHB7IE",
-      "id_professor": "-TtydJtXSHU",
-      "alunos_cont": 1,
-      "redacoes_total": 0,
-      "redacoes_pendentes": 0,
-      "id": "pnsQW36HUxU"
-    },
-    {
-      "nome_turma": "Letras",
-      "serie": "Superior",
-      "codigo_turma": "U56A6ZS4",
-      "id_professor": "-TtydJtXSHU",
-      "alunos_cont": 1,
-      "redacoes_total": 0,
-      "redacoes_pendentes": 0,
-      "id": "1MkBJx5kpdk"
+      "id": "SPuE5woorRk"
     }
   ],
   "tb_aluno_turma": [],
@@ -116,6 +120,26 @@
       "id_turma": "rRsyyt6k0G8",
       "data_entrega": "2026-06-08",
       "id": "9dU9N_pPCiU"
+    },
+    {
+      "tema": "Tema Geral - Proposto pelo Professor",
+      "texto": "teste de redação",
+      "status": "Corrigida",
+      "id_aluno": "3Bzimmvbb_c",
+      "nome_aluno": "ana oliveira",
+      "id_turma": "6PIFpFIhnlI",
+      "data_entrega": "2026-06-08",
+      "id": "0bby9ZXQXYc"
+    },
+    {
+      "tema": "Tema Geral - Proposto pelo Professor",
+      "texto": "teste 1",
+      "status": "Corrigida",
+      "id_aluno": "2hLSSSiAHlU",
+      "nome_aluno": "aluno1",
+      "id_turma": "SPuE5woorRk",
+      "data_entrega": "2026-06-08",
+      "id": "JJchhA3QR_0"
     }
   ],
   "tb_correcao": [
@@ -158,6 +182,22 @@
       "comentario": "legal",
       "data_correcao": "2026-06-08",
       "id": "6lXb6JzkyNI"
+    },
+    {
+      "id_redacao": "0bby9ZXQXYc",
+      "id_professor": "-TtydJtXSHU",
+      "nota": 450,
+      "comentario": "faltam palavras para descrever",
+      "data_correcao": "2026-06-08",
+      "id": "h3B5ZFScI1o"
+    },
+    {
+      "id_redacao": "JJchhA3QR_0",
+      "id_professor": "8Z8UndZDYMk",
+      "nota": 500,
+      "comentario": "legal, tudo certo!",
+      "data_correcao": "2026-06-08",
+      "id": "JZRrfLvG6OM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
