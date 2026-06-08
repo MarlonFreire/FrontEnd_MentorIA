@@ -10,6 +10,7 @@ function VisualizarRedacao() {
   const [nota, setNota] = useState('');
   const [comentario, setComentario] = useState('');
   const [professor, setProfessor] = useState(null);
+  const [jaCorrigida, setJaCorrigida] = useState(false);
 
   useEffect(() => {
     // 1. Carrega os dados do professor logado
@@ -20,10 +21,25 @@ function VisualizarRedacao() {
         .then(dados => { if (dados.length > 0) setProfessor(dados[0]); });
     }
 
-    // 2. Carrega a redação específica que foi clicada
+    // 2. Carrega a redação específica
     fetch(`http://localhost:5000/tb_redacoes/${idRedacao}`)
       .then(res => res.json())
-      .then(dados => setRedacao(dados));
+      .then(dados => {
+        setRedacao(dados);
+        
+        // Se o status já for Corrigida, busca a correção existente no banco
+        if (dados.status === 'Corrigida') {
+          setJaCorrigida(true);
+          fetch(`http://localhost:5000/tb_correcao?id_redacao=${idRedacao}`)
+            .then(res => res.json())
+            .then(correcoes => {
+              if (correcoes.length > 0) {
+                setNota(correcoes[0].nota);
+                setComentario(correcoes[0].comentario);
+              }
+            });
+        }
+      });
   }, [idRedacao]);
 
   const finalizarCorrecao = async (e) => {
@@ -34,13 +50,12 @@ function VisualizarRedacao() {
       return;
     }
 
-    // Estrutura batendo certinho com a sua tabela 'tb_correcao'
     const novaCorrecao = {
-      id_redacao: parseInt(idRedacao),
+      id_redacao: idRedacao, 
       id_professor: professor.id,
       nota: parseFloat(nota),
       comentario: comentario,
-      data_correcao: new Date().toISOString().split('T')[0] // Formato YYYY-MM-DD
+      data_correcao: new Date().toISOString().split('T')[0]
     };
 
     try {
@@ -59,7 +74,7 @@ function VisualizarRedacao() {
       });
 
       alert("Redação corrigida com sucesso!");
-      navigate(-1); // Volta para a tela anterior
+      navigate(-1);
     } catch (error) {
       alert("Erro ao salvar correção.");
     }
@@ -75,32 +90,29 @@ function VisualizarRedacao() {
       </header>
 
       <main className="painel-duplo">
-        {/* LADO ESQUERDO: Texto do Aluno (Apenas Leitura) */}
+        {/* LADO ESQUERDO: Texto do Aluno */}
         <section className="bloco-leitura">
           <div className="info-redacao-topo">
             <h1>{redacao.tema}</h1>
             <span>Enviado por: <strong>{redacao.nome_aluno}</strong></span>
           </div>
           <div className="texto-do-aluno">
-            {/* O texto digitado pelo aluno fica aqui dentro */}
             <p>{redacao.texto}</p>
           </div>
         </section>
 
-        {/* LADO DIREITO: Formulário de Correção do Professor */}
+        {/* LADO DIREITO: Formulário ou Visualização fixa */}
         <section className="bloco-formulario">
-          <h2>Avaliação Humana</h2>
+          <h2>{jaCorrigida ? "Avaliação Concluída" : "Avaliação Humana"}</h2>
           <form onSubmit={finalizarCorrecao}>
             <div className="campo-grupo">
               <label>Nota da Redação (0 a 1000)</label>
               <input 
                 type="number" 
-                min="0" 
-                max="1000" 
-                step="50"
                 placeholder="Ex: 850" 
                 value={nota}
                 onChange={e => setNota(e.target.value)}
+                disabled={jaCorrigida} /* Bloqueia o campo se já estiver corrigido */
                 required 
               />
             </div>
@@ -109,16 +121,24 @@ function VisualizarRedacao() {
               <label>Comentários e Feedbacks Pedagógicos</label>
               <textarea 
                 rows="10" 
-                placeholder="Digite aqui os pontos fortes e o que o aluno precisa melhorar..."
+                placeholder="Digite os feedbacks..."
                 value={comentario}
                 onChange={e => setComentario(e.target.value)}
+                disabled={jaCorrigida} /* Bloqueia o campo se já estiver corrigido */
                 required
               ></textarea>
             </div>
 
-            <button type="submit" className="btn-finalizar-enviar">
-              Concluir e Enviar Correção
-            </button>
+            {/* Remove ou desabilita o botão se já foi enviado */}
+            {!jaCorrigida ? (
+              <button type="submit" className="btn-finalizar-enviar">
+                Concluir e Enviar Correção
+              </button>
+            ) : (
+              <div style={{ textAlign: 'center', color: '#16a34a', fontWeight: 'bold', padding: '15px', background: '#f0fdf4', borderRadius: '8px', border: '1px solid #bbf7d0' }}>
+                ✓ Esta redação já foi avaliada e enviada ao aluno.
+              </div>
+            )}
           </form>
         </section>
       </main>

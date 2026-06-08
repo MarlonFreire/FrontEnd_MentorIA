@@ -142,6 +142,22 @@
       "comentario": "massa",
       "data_correcao": "2026-06-08",
       "id": "4BamLlW6if8"
+    },
+    {
+      "id_redacao": 9,
+      "id_professor": "-TtydJtXSHU",
+      "nota": 200,
+      "comentario": "legal",
+      "data_correcao": "2026-06-08",
+      "id": "1ll0_XlwSMM"
+    },
+    {
+      "id_redacao": "9dU9N_pPCiU",
+      "id_professor": "-TtydJtXSHU",
+      "nota": 200,
+      "comentario": "legal",
+      "data_correcao": "2026-06-08",
+      "id": "6lXb6JzkyNI"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
